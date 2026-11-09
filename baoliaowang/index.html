@@ -1,0 +1,1785 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>爆料网 - 内幕动态聚合</title>
+  <meta name="description" content="爆料网汇聚热点线索、匿名投稿与深度追踪，提供今日新增曝料、爆料热榜、事件时间线与真假辨析指南，适合关注内幕动态与信息核验的读者浏览。">
+  <meta name="keywords" content="匿名投稿,内幕线索,事件追踪,真相核查,社区曝料">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23b91c1c'/%3E%3Cpath d='M8 22 L16 6 L24 22 Z' fill='%23fde68a'/%3E%3Ccircle cx='16' cy='24' r='2.5' fill='%23fde68a'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --red-primary: #b91c1c;
+      --red-dark: #7f1d1d;
+      --red-light: #fef2f2;
+      --amber-accent: #d97706;
+      --amber-soft: #fffbeb;
+      --gray-50: #fafaf9;
+      --gray-100: #f5f5f4;
+      --gray-200: #e7e5e4;
+      --gray-300: #d6d3d1;
+      --gray-600: #57534e;
+      --gray-800: #292524;
+      --gray-900: #1c1917;
+      --white: #ffffff;
+      --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      --font-heading: 'Georgia', 'Times New Roman', 'Noto Serif SC', serif;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 16px;
+      --sticky-offset: 112px;
+      --container-width: 1360px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: var(--sticky-offset);
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--gray-50);
+      color: var(--gray-900);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    /* 吸顶公告条 */
+    .top-notice {
+      background: var(--gray-900);
+      color: #e7e5e4;
+      font-size: 0.82rem;
+      padding: 0.4rem 1.5rem;
+      text-align: center;
+      letter-spacing: 0.02em;
+      border-bottom: 1px solid #44403c;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .top-notice strong {
+      color: #fbbf24;
+      font-weight: 600;
+    }
+    .top-notice .divider {
+      color: #57534e;
+      margin: 0 0.25rem;
+    }
+
+    /* 吸顶页头 */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      border-bottom: 2px solid var(--red-primary);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .header-inner {
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: 0.6rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+    }
+    .brand-name {
+      font-family: var(--font-heading);
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--red-primary);
+      letter-spacing: 0.02em;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+    .main-nav {
+      display: flex;
+      gap: 0.2rem;
+      flex: 1;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .main-nav a {
+      font-size: 0.9rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: var(--radius-md);
+      color: var(--gray-600);
+      font-weight: 500;
+      transition: background 0.15s, color 0.15s;
+      white-space: nowrap;
+    }
+    .main-nav a:hover,
+    .main-nav a:focus-visible {
+      background: var(--red-light);
+      color: var(--red-primary);
+      outline: 2px solid var(--red-primary);
+      outline-offset: 1px;
+    }
+    .header-search {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      margin-left: auto;
+    }
+    .header-search input {
+      padding: 0.35rem 0.6rem;
+      border: 1px solid var(--gray-300);
+      border-radius: var(--radius-md);
+      font-size: 0.85rem;
+      width: 160px;
+      background: var(--gray-50);
+      transition: border 0.15s;
+    }
+    .header-search input:focus {
+      outline: 2px solid var(--red-primary);
+      border-color: transparent;
+      background: var(--white);
+    }
+    .header-search button {
+      background: var(--red-primary);
+      color: var(--white);
+      padding: 0.35rem 0.8rem;
+      border-radius: var(--radius-md);
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: background 0.15s;
+    }
+    .header-search button:hover {
+      background: var(--red-dark);
+    }
+
+    /* 首屏 */
+    .hero {
+      background: linear-gradient(135deg, #1c1917 0%, #292524 60%, #3b1c1c 100%);
+      color: var(--white);
+      padding: 3rem 1.5rem 2.8rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      right: -80px;
+      top: -40px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(185,28,28,0.35) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: var(--container-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 2.5rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-content h1 {
+      font-family: var(--font-heading);
+      font-size: 3.2rem;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      letter-spacing: 0.01em;
+      color: #fef2f2;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .hero-desc {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #d6d3d1;
+      max-width: 640px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-desc strong {
+      color: #fbbf24;
+      font-weight: 600;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--red-primary);
+      color: var(--white);
+      padding: 0.7rem 1.6rem;
+      border-radius: var(--radius-lg);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.15s, transform 0.1s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .btn-primary:hover {
+      background: var(--red-dark);
+      transform: translateY(-1px);
+    }
+    .btn-outline {
+      border: 1px solid #57534e;
+      color: #e7e5e4;
+      padding: 0.7rem 1.4rem;
+      border-radius: var(--radius-lg);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: #a8a29e;
+    }
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-visual svg {
+      width: 100%;
+      max-width: 280px;
+      height: auto;
+      filter: drop-shadow(0 8px 20px rgba(185,28,28,0.3));
+    }
+
+    /* 主容器三栏 */
+    .portal-container {
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: 2rem 1.5rem 3rem;
+      display: grid;
+      grid-template-columns: 180px 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    /* 左栏：频道索引 */
+    .channel-sidebar {
+      position: sticky;
+      top: var(--sticky-offset);
+      align-self: start;
+    }
+    .channel-sidebar h2 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gray-600);
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+      border-bottom: 1px solid var(--gray-200);
+      padding-bottom: 0.4rem;
+    }
+    .channel-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+    .channel-list a {
+      display: block;
+      padding: 0.45rem 0.8rem;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      color: var(--gray-600);
+      font-weight: 500;
+      transition: background 0.12s, color 0.12s;
+      border-left: 3px solid transparent;
+    }
+    .channel-list a:hover,
+    .channel-list a:focus-visible {
+      background: var(--red-light);
+      color: var(--red-primary);
+      border-left-color: var(--red-primary);
+      outline: none;
+    }
+    .channel-list a.active {
+      background: var(--red-light);
+      color: var(--red-primary);
+      border-left-color: var(--red-primary);
+      font-weight: 600;
+    }
+
+    /* 中栏主内容 */
+    .main-content {
+      min-width: 0;
+    }
+    .section-block {
+      margin-bottom: 2.8rem;
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1.2rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .section-header h2 {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      border-left: 5px solid var(--red-primary);
+      padding-left: 0.8rem;
+      line-height: 1.3;
+    }
+    .section-header .more-link {
+      font-size: 0.85rem;
+      color: var(--red-primary);
+      font-weight: 500;
+    }
+    .section-header .more-link:hover {
+      text-decoration: underline;
+    }
+
+    /* 卡片网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+    }
+    .expose-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-200);
+      overflow: hidden;
+      transition: box-shadow 0.15s, transform 0.1s;
+      display: flex;
+      flex-direction: column;
+    }
+    .expose-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .expose-card img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      background: var(--gray-100);
+    }
+    .card-body {
+      padding: 0.9rem 1rem 1rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 0.5rem;
+    }
+    .tag {
+      font-size: 0.68rem;
+      padding: 0.15rem 0.5rem;
+      background: var(--gray-100);
+      border-radius: 20px;
+      color: var(--gray-600);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .tag.hot {
+      background: #fef2f2;
+      color: var(--red-primary);
+    }
+    .card-body h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 0.35rem;
+      color: var(--gray-900);
+    }
+    .card-body .excerpt {
+      font-size: 0.82rem;
+      color: var(--gray-600);
+      line-height: 1.55;
+      flex: 1;
+      margin-bottom: 0.5rem;
+    }
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      color: var(--gray-600);
+      border-top: 1px solid var(--gray-100);
+      padding-top: 0.5rem;
+      margin-top: auto;
+    }
+    .card-meta .heat {
+      color: var(--red-primary);
+      font-weight: 600;
+    }
+
+    /* 最新更新紧凑列表 */
+    .update-list {
+      list-style: none;
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--gray-200);
+      overflow: hidden;
+    }
+    .update-list li {
+      padding: 0.7rem 1rem;
+      border-bottom: 1px solid var(--gray-100);
+      font-size: 0.88rem;
+      display: flex;
+      gap: 0.6rem;
+      align-items: baseline;
+      transition: background 0.12s;
+    }
+    .update-list li:last-child {
+      border-bottom: none;
+    }
+    .update-list li:hover {
+      background: var(--gray-50);
+    }
+    .update-time {
+      font-size: 0.72rem;
+      color: var(--gray-600);
+      white-space: nowrap;
+      flex-shrink: 0;
+      font-variant-numeric: tabular-nums;
+      min-width: 72px;
+    }
+    .update-title {
+      font-weight: 600;
+      color: var(--gray-900);
+    }
+    .update-summary {
+      color: var(--gray-600);
+      font-size: 0.82rem;
+    }
+    .update-badge {
+      font-size: 0.65rem;
+      background: var(--red-light);
+      color: var(--red-primary);
+      padding: 0.1rem 0.4rem;
+      border-radius: 10px;
+      font-weight: 600;
+      margin-left: auto;
+      white-space: nowrap;
+    }
+
+    /* 分类入口 */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.8rem;
+    }
+    .category-item {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 1rem 0.8rem;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--gray-800);
+      transition: border-color 0.15s, background 0.15s, color 0.15s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .category-item:hover,
+    .category-item:focus-visible {
+      border-color: var(--red-primary);
+      background: var(--red-light);
+      color: var(--red-primary);
+      outline: none;
+    }
+    .category-item span:first-child {
+      font-size: 1.3rem;
+      line-height: 1;
+    }
+    .category-item small {
+      font-size: 0.68rem;
+      font-weight: 400;
+      color: var(--gray-600);
+    }
+
+    /* 深度解析 */
+    .deep-dive {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--gray-200);
+      padding: 1.5rem 1.6rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .deep-dive h3 {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin: 1.2rem 0 0.6rem;
+    }
+    .deep-dive h3:first-of-type {
+      margin-top: 0;
+    }
+    .deep-dive p {
+      font-size: 0.9rem;
+      color: var(--gray-600);
+      line-height: 1.75;
+      margin-bottom: 0.8rem;
+    }
+    .deep-dive ul {
+      margin: 0.4rem 0 0.8rem 1.2rem;
+      font-size: 0.9rem;
+      color: var(--gray-600);
+      line-height: 1.75;
+    }
+    .deep-dive ul li {
+      margin-bottom: 0.3rem;
+    }
+    .deep-dive strong {
+      color: var(--red-primary);
+      font-weight: 600;
+    }
+
+    /* 体验指南 */
+    .guide-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .guide-step {
+      display: flex;
+      gap: 1rem;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.2rem;
+      align-items: flex-start;
+    }
+    .step-num {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--red-primary);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 2.2rem;
+      text-align: center;
+      opacity: 0.8;
+    }
+    .step-content h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+    .step-content p {
+      font-size: 0.85rem;
+      color: var(--gray-600);
+      line-height: 1.6;
+    }
+
+    /* FAQ */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .faq-list details {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .faq-list summary {
+      padding: 0.8rem 1rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--white);
+      transition: background 0.12s;
+    }
+    .faq-list summary::-webkit-details-marker {
+      display: none;
+    }
+    .faq-list summary::after {
+      content: '+';
+      font-size: 1.2rem;
+      color: var(--red-primary);
+      font-weight: 400;
+      line-height: 1;
+    }
+    .faq-list details[open] summary::after {
+      content: '−';
+    }
+    .faq-list summary:hover {
+      background: var(--gray-50);
+    }
+    .faq-list .faq-answer {
+      padding: 0 1rem 0.9rem;
+      font-size: 0.85rem;
+      color: var(--gray-600);
+      line-height: 1.7;
+      border-top: 1px solid var(--gray-100);
+      margin-top: 0.2rem;
+      padding-top: 0.7rem;
+    }
+
+    /* 用户评论 */
+    .comment-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.9rem;
+    }
+    .comment-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-md);
+      padding: 0.9rem 1rem;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+    .comment-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.35rem;
+    }
+    .comment-nick {
+      font-weight: 700;
+      color: var(--gray-800);
+      font-size: 0.82rem;
+    }
+    .comment-date {
+      font-size: 0.68rem;
+      color: var(--gray-600);
+    }
+    .comment-text {
+      color: var(--gray-600);
+    }
+    .comment-text strong {
+      color: var(--red-primary);
+      font-weight: 600;
+    }
+
+    /* 资讯列表 */
+    .news-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .news-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 1rem;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: box-shadow 0.12s;
+    }
+    .news-item:hover {
+      box-shadow: var(--shadow-sm);
+    }
+    .news-item img {
+      width: 120px;
+      height: 100%;
+      object-fit: cover;
+      background: var(--gray-100);
+    }
+    .news-body {
+      padding: 0.7rem 0.8rem 0.7rem 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .news-body h3 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+    .news-body .news-date {
+      font-size: 0.7rem;
+      color: var(--gray-600);
+      margin-bottom: 0.25rem;
+    }
+    .news-body p {
+      font-size: 0.8rem;
+      color: var(--gray-600);
+      line-height: 1.5;
+    }
+
+    /* 相关推荐标签 */
+    .related-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .related-tags a {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 20px;
+      padding: 0.3rem 0.9rem;
+      font-size: 0.82rem;
+      color: var(--gray-600);
+      transition: background 0.12s, border-color 0.12s, color 0.12s;
+    }
+    .related-tags a:hover {
+      background: var(--red-light);
+      border-color: var(--red-primary);
+      color: var(--red-primary);
+    }
+
+    /* 右栏辅助 */
+    .sidebar {
+      position: sticky;
+      top: var(--sticky-offset);
+      align-self: start;
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+    }
+    .sidebar-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.1rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .sidebar-card h3 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      border-bottom: 2px solid var(--red-primary);
+      padding-bottom: 0.4rem;
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .hot-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .hot-list li {
+      display: flex;
+      gap: 0.6rem;
+      align-items: baseline;
+      font-size: 0.83rem;
+    }
+    .hot-list .rank {
+      font-weight: 700;
+      color: var(--red-primary);
+      font-size: 0.75rem;
+      width: 1.4rem;
+      flex-shrink: 0;
+      text-align: right;
+    }
+    .hot-list .hot-title {
+      font-weight: 500;
+      color: var(--gray-800);
+      line-height: 1.4;
+    }
+    .hot-list .hot-count {
+      margin-left: auto;
+      font-size: 0.68rem;
+      color: var(--gray-600);
+      white-space: nowrap;
+    }
+    .timeline-mini {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      font-size: 0.82rem;
+    }
+    .timeline-mini li {
+      display: flex;
+      gap: 0.5rem;
+      align-items: baseline;
+    }
+    .timeline-mini .t-date {
+      font-size: 0.68rem;
+      color: var(--gray-600);
+      white-space: nowrap;
+      min-width: 52px;
+      font-variant-numeric: tabular-nums;
+    }
+    .timeline-mini .t-text {
+      color: var(--gray-600);
+      line-height: 1.4;
+    }
+
+    /* 页尾 */
+    .site-footer {
+      background: var(--gray-900);
+      color: #a8a29e;
+      padding: 2.5rem 1.5rem 1.5rem;
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      border-top: 3px solid var(--red-primary);
+    }
+    .footer-inner {
+      max-width: var(--container-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 2rem;
+    }
+    .footer-brand .brand-name-footer {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fef2f2;
+      margin-bottom: 0.4rem;
+    }
+    .footer-brand p {
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: #78716c;
+      max-width: 260px;
+    }
+    .footer-col h4 {
+      color: #e7e5e4;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.7rem;
+      letter-spacing: 0.03em;
+    }
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .footer-col a {
+      color: #a8a29e;
+      font-size: 0.8rem;
+      transition: color 0.12s;
+    }
+    .footer-col a:hover {
+      color: #fbbf24;
+    }
+    .footer-bottom {
+      max-width: var(--container-width);
+      margin: 1.8rem auto 0;
+      padding-top: 1.2rem;
+      border-top: 1px solid #44403c;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      color: #78716c;
+    }
+
+    /* 无结果提示 */
+    .no-results {
+      display: none;
+      padding: 1.5rem;
+      text-align: center;
+      color: var(--gray-600);
+      font-size: 0.9rem;
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      border: 1px dashed var(--gray-300);
+    }
+    .no-results.visible {
+      display: block;
+    }
+
+    /* 响应式 */
+    @media (max-width: 1024px) {
+      :root {
+        --sticky-offset: 108px;
+      }
+      .portal-container {
+        grid-template-columns: 1fr 260px;
+        gap: 1.5rem;
+      }
+      .channel-sidebar {
+        display: none;
+      }
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .hero-visual {
+        display: none;
+      }
+      .hero-content h1 {
+        font-size: 2.6rem;
+      }
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
+      }
+      .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .category-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    @media (max-width: 740px) {
+      :root {
+        --sticky-offset: 96px;
+      }
+      .portal-container {
+        grid-template-columns: 1fr;
+        padding: 1.2rem 1rem 2rem;
+      }
+      .sidebar {
+        position: static;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+      .main-nav {
+        display: none;
+      }
+      .header-inner {
+        padding: 0.5rem 1rem;
+        gap: 0.8rem;
+      }
+      .brand-name {
+        font-size: 1.4rem;
+      }
+      .header-search {
+        margin-left: 0;
+        width: 100%;
+      }
+      .header-search input {
+        width: 100%;
+      }
+      .hero {
+        padding: 2rem 1rem 1.8rem;
+      }
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      .hero-desc {
+        font-size: 0.95rem;
+      }
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+      .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .comment-grid {
+        grid-template-columns: 1fr;
+      }
+      .news-item {
+        grid-template-columns: 100px 1fr;
+      }
+      .news-item img {
+        width: 100px;
+      }
+      .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .section-header h2 {
+        font-size: 1.3rem;
+      }
+      .deep-dive {
+        padding: 1.2rem;
+      }
+      .update-list li {
+        flex-wrap: wrap;
+        gap: 0.2rem 0.5rem;
+      }
+      .update-badge {
+        margin-left: 0;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .hero-content h1 {
+        font-size: 1.7rem;
+      }
+      .category-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .header-search {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+
+    /* 查找高亮 */
+    .search-highlight {
+      background: #fef08a;
+      border-radius: 2px;
+    }
+
+    /* 焦点可见 */
+    :focus-visible {
+      outline: 2px solid var(--red-primary);
+      outline-offset: 2px;
+    }
+  </style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+  <!-- 吸顶公告条 -->
+  <div class="top-notice" role="status" aria-label="站内公告">
+    <span><strong>今日新增</strong> 14 条匿名投稿</span>
+    <span class="divider">|</span>
+    <span>「城南旧事」档案已解封</span>
+    <span class="divider">|</span>
+    <span>本周爆料热榜更新于 11 月 8 日 09:30</span>
+  </div>
+
+  <!-- 吸顶页头 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/#hero" class="brand" aria-label="爆料网首页">
+        <svg class="brand-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="36" height="36" rx="8" fill="#b91c1c"/>
+          <path d="M10 26 L18 8 L26 26 Z" fill="#fde68a"/>
+          <circle cx="18" cy="28" r="2.8" fill="#fde68a"/>
+        </svg>
+        <span class="brand-name">爆料网</span>
+      </a>
+      <nav class="main-nav" aria-label="主导航">
+        <a href="/#expose-picks">精选爆料</a>
+        <a href="/#latest-updates">最新动态</a>
+        <a href="/#categories">分类索引</a>
+        <a href="/#deep-dive">深度解析</a>
+        <a href="/#faq">常见问答</a>
+        <a href="/#community">用户评论</a>
+      </nav>
+      <div class="header-search">
+        <input type="search" id="searchInput" placeholder="搜索条目、标签…" aria-label="搜索爆料条目">
+        <button type="button" id="searchBtn" aria-label="搜索">查找</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 首屏 -->
+  <section class="hero" id="hero">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <h1>爆料网</h1>
+        <p class="hero-desc">
+          汇聚<strong>匿名投稿、内幕线索与事件追踪</strong>的垂直社区。这里提供今日新增曝料、爆料热榜、事件时间线梳理、真假辨析指南与用户讨论，适合关注社会动态、行业内幕与信息核验的读者。
+        </p>
+        <div class="hero-actions">
+          <a href="/#expose-picks" class="btn-primary">浏览精选爆料 →</a>
+          <a href="/#latest-updates" class="btn-outline">查看最新动态</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <svg viewBox="0 0 280 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="40" y="30" width="200" height="160" rx="12" fill="#292524" stroke="#57534e" stroke-width="2"/>
+          <line x1="60" y1="60" x2="180" y2="60" stroke="#fbbf24" stroke-width="3" stroke-linecap="round"/>
+          <line x1="60" y1="85" x2="220" y2="85" stroke="#57534e" stroke-width="2" stroke-linecap="round"/>
+          <line x1="60" y1="105" x2="200" y2="105" stroke="#57534e" stroke-width="2" stroke-linecap="round"/>
+          <line x1="60" y1="125" x2="160" y2="125" stroke="#57534e" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="220" cy="160" r="28" fill="#b91c1c" fill-opacity="0.2" stroke="#b91c1c" stroke-width="2"/>
+          <path d="M210 160 L218 168 L232 152" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="60" y="140" width="50" height="20" rx="4" fill="#b91c1c" fill-opacity="0.3"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 三栏主容器 -->
+  <div class="portal-container">
+
+    <!-- 左栏：频道索引 -->
+    <aside class="channel-sidebar" aria-label="频道索引">
+      <h2>频道索引</h2>
+      <ul class="channel-list">
+        <li><a href="/#expose-picks" class="active">精选爆料</a></li>
+        <li><a href="/#latest-updates">最新动态</a></li>
+        <li><a href="/#categories">分类索引</a></li>
+        <li><a href="/#deep-dive">深度解析</a></li>
+        <li><a href="/#guide">体验指南</a></li>
+        <li><a href="/#faq">常见问答</a></li>
+        <li><a href="/#community">用户评论</a></li>
+        <li><a href="/#news">相关资讯</a></li>
+        <li><a href="/#related">相关推荐</a></li>
+        <li><a href="/#hot-ranking">热门榜单</a></li>
+        <li><a href="/#timeline">事件时间线</a></li>
+      </ul>
+    </aside>
+
+    <!-- 中栏主内容 -->
+    <main class="main-content">
+
+      <!-- 板块1：主题领域概览 -->
+      <section class="section-block" id="overview">
+        <div class="section-header">
+          <h2>爆料领域概览</h2>
+        </div>
+        <div class="deep-dive" style="padding:1.2rem 1.4rem;">
+          <p>
+            <strong>爆料网</strong>所覆盖的内容方向主要围绕匿名信息源、内幕线索与事件追踪展开。当前社区中活跃的爆料类型包括：职场内部制度曝光、消费维权实录、行业供应链潜规则、社区公共事务争议、以及文化娱乐领域的制作内幕。每一条爆料通常附带投稿时间、信息来源类型（匿名/实名/转述）与核验状态标签，方便读者快速判断可信度。
+          </p>
+          <p style="margin-top:0.6rem;">
+            近期值得关注的条目有「城南旧事」档案解封、某连锁餐饮后厨操作争议、以及匿名工程师披露的智能硬件数据采集范围。这些条目在社区中引发了关于隐私边界与行业规范的讨论，也带动了相关分类的投稿量上升。读者可以通过分类索引进入对应频道，或直接查看热榜了解当前讨论焦点。
+          </p>
+        </div>
+      </section>
+
+      <!-- 板块2：精选内容推荐 -->
+      <section class="section-block" id="expose-picks">
+        <div class="section-header">
+          <h2>精选爆料推荐</h2>
+          <a href="/#latest-updates" class="more-link">查看最新 →</a>
+        </div>
+        <div class="card-grid" id="cardGrid">
+          <!-- 卡片1 -->
+          <article class="expose-card" data-keywords="城南旧事 档案解封 社区事务">
+            <img src="https://picsum.photos/seed/chengnan-jiushi01/400/300" alt="城南旧事档案解封封面图" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <div class="card-tags">
+                <span class="tag hot">档案解封</span>
+                <span class="tag">社区事务</span>
+                <span class="tag">匿名投稿</span>
+              </div>
+              <h3>「城南旧事」档案解封：十年争议地块的来龙去脉</h3>
+              <p class="excerpt">一份标注为2016年的内部会议记录被匿名公开，涉及城南地块规划调整前的多方沟通细节。投稿人附上了三页扫描件并标注关键段落。</p>
+              <div class="card-meta">
+                <span>🔥 热度 9.2k</span>
+                <span>11-08 更新</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 卡片2 -->
+          <article class="expose-card" data-keywords="连锁餐饮 后厨 操作争议">
+            <img src="https://picsum.photos/seed/canyin-houchu02/400/300" alt="连锁餐饮后厨操作争议配图" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <div class="card-tags">
+                <span class="tag hot">消费维权</span>
+                <span class="tag">后厨曝光</span>
+                <span class="tag">视频证据</span>
+              </div>
+              <h3>某连锁餐饮后厨操作争议：三段视频与两份员工口述</h3>
+              <p class="excerpt">投稿人提供了三段拍摄于不同门店的后厨操作视频，并附上两名前员工的文字口述，涉及食材存放与清洁流程。品牌方尚未公开回应。</p>
+              <div class="card-meta">
+                <span>🔥 热度 8.7k</span>
+                <span>11-07 更新</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 卡片3 -->
+          <article class="expose-card" data-keywords="智能硬件 数据采集 隐私">
+            <img src="https://picsum.photos/seed/zhineng-yingjian03/400/300" alt="智能硬件数据采集范围爆料封面" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <div class="card-tags">
+                <span class="tag">科技内幕</span>
+                <span class="tag hot">隐私边界</span>
+                <span class="tag">技术文档</span>
+              </div>
+              <h3>匿名工程师披露智能硬件数据采集范围：一份内部测试清单</h3>
+              <p class="excerpt">清单列出了某款家用智能设备在测试阶段采集的字段类型，包括设备位置、周边Wi-Fi指纹与使用时段。投稿人自称参与过测试流程。</p>
+              <div class="card-meta">
+                <span>🔥 热度 8.1k</span>
+                <span>11-06 更新</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 卡片4 -->
+          <article class="expose-card" data-keywords="物流 分拣 临时工 待遇">
+            <img src="https://picsum.photos/seed/wuliu-fenjian04/400/300" alt="物流分拣临时工待遇爆料配图" width="400" height="300" loading="lazy">
+            <div class="card-body">
+              <div class="card-tags">
+                <span class="tag">职场曝光</span>
+                <span class="tag">物流行业</span>
+                <span class="tag">工资单</span>
+              </div>
+              <h3>物流分拣临时工待遇实录：连续三周夜班工资单对比</h3>
+              <p class="excerpt">投稿人晒出三周夜班工资单，显示基本时薪与加班计算方式的差异，并附上工头口头承诺的录音转文字片段。</p>
+              <div class="card-meta">
+                <span>🔥 热度 7.4k</span>
+                <span>11-05 更新</span>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="no-results" id="noResults">没有找到匹配的爆料条目，请尝试其他关键词。</div>
+      </section>
+
+      <!-- 板块3：最新更新动态 -->
+      <section class="section-block" id="latest-updates">
+        <div class="section-header">
+          <h2>最新更新动态</h2>
+          <span class="more-link" style="color:var(--gray-600);font-size:0.75rem;">截至 2026-11-08 09:30</span>
+        </div>
+        <ul class="update-list">
+          <li>
+            <span class="update-time">今天 09:30</span>
+            <span class="update-title">「城南旧事」档案</span>
+            <span class="update-summary">新增第4页手写批注解读</span>
+            <span class="update-badge">新</span>
+          </li>
+          <li>
+            <span class="update-time">今天 08:15</span>
+            <span class="update-title">连锁餐饮后厨视频</span>
+            <span class="update-summary">品牌方发布首份声明，投稿人追加一段监控</span>
+            <span class="update-badge">追踪</span>
+          </li>
+          <li>
+            <span class="update-time">昨天 21:10</span>
+            <span class="update-title">智能硬件数据清单</span>
+            <span class="update-summary">技术社区展开字段用途讨论</span>
+          </li>
+          <li>
+            <span class="update-time">昨天 18:40</span>
+            <span class="update-title">物流分拣工资单</span>
+            <span class="update-summary">新增两位前员工留言补充工时细节</span>
+          </li>
+          <li>
+            <span class="update-time">11-07 14:20</span>
+            <span class="update-title">某共享办公空间消防验收记录</span>
+            <span class="update-summary">匿名投稿附上两份检查表扫描件</span>
+          </li>
+          <li>
+            <span class="update-time">11-07 10:05</span>
+            <span class="update-title">影视剧组超时工作爆料</span>
+            <span class="update-summary">剧组制片主任回应称“排期已调整”</span>
+          </li>
+          <li>
+            <span class="update-time">11-06 22:30</span>
+            <span class="update-title">二手平台质检流程</span>
+            <span class="update-summary">投稿人上传内部质检培训手册节选</span>
+          </li>
+          <li>
+            <span class="update-time">11-06 16:15</span>
+            <span class="update-title">社区团购退货规则</span>
+            <span class="update-summary">团长群聊天记录截图曝光退货门槛调整</span>
+          </li>
+          <li>
+            <span class="update-time">11-05 09:00</span>
+            <span class="update-title">某招聘平台简历筛选逻辑</span>
+            <span class="update-summary">前员工口述关键词过滤机制</span>
+          </li>
+          <li>
+            <span class="update-time">11-04 19:45</span>
+            <span class="update-title">长租公寓退押金纠纷</span>
+            <span class="update-summary">租客整理12条沟通记录与合同条款对照</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- 板块4：分类入口 -->
+      <section class="section-block" id="categories">
+        <div class="section-header">
+          <h2>分类入口</h2>
+        </div>
+        <div class="category-grid">
+          <a href="/#categories" class="category-item">
+            <span>📋</span>
+            <span>职场内幕</span>
+            <small>制度与待遇</small>
+          </a>
+          <a href="/#categories" class="category-item">
+            <span>🛒</span>
+            <span>消费维权</span>
+            <small>后厨与售后</small>
+          </a>
+          <a href="/#categories" class="category-item">
+            <span>🔒</span>
+            <span>隐私边界</span>
+            <small>数据与监控</small>
+          </a>
+          <a href="/#categories" class="category-item">
+            <span>🏘️</span>
+            <span>社区事务</span>
+            <small>规划与物业</small>
+          </a>
+          <a href="/#categories" class="category-item">
+            <span>🎬</span>
+            <span>文娱制作</span>
+            <small>剧组与排期</small>
+          </a>
+          <a href="/#categories" class="category-item">
+            <span>📦</span>
+            <span>物流仓储</span>
+            <small>分拣与配送</small>
+          </a>
+          <a href="/#categories" class="category-item">
+            <span>💻</span>
+            <span>科技产品</span>
+            <small>硬件与算法</small>
+          </a>
+          <a href="/#categories" class="category-item">
+            <span>📑</span>
+            <span>档案解封</span>
+            <small>历史记录</small>
+          </a>
+        </div>
+      </section>
+
+      <!-- 板块5：深度解析正文 -->
+      <section class="section-block" id="deep-dive">
+        <div class="section-header">
+          <h2>深度解析：爆料的可信度层次与类型差异</h2>
+        </div>
+        <div class="deep-dive">
+          <h3>一、线索来源的三种基本类型</h3>
+          <p>
+            在<strong>爆料网</strong>的条目中，来源类型通常分为匿名投稿、实名转述与文档扫描件三大类。匿名投稿往往附带文字描述或聊天记录截图，信息量大但核验成本高；实名转述需要投稿者承担一定身份风险，因此叙述通常更谨慎，细节也更收敛；文档扫描件则介于两者之间——文件本身可追溯格式与编号，但获取途径未必合规。读者判断时，可以先看条目顶部的来源标签，再结合正文中的证据类型做初步筛选。
+          </p>
+
+          <h3>二、核验状态标签的实际含义</h3>
+          <p>
+            每条爆料在发布时会被标记一个核验状态，常见的有「待核验」「部分印证」「多方交叉」「存疑」四种。待核验表示投稿人提供了原始材料，但社区尚未找到独立信源；部分印证表示至少有一个外部信息点与投稿内容吻合；多方交叉则要求两个以上互不认识的投稿人指向同一事实；存疑通常出现在关键证据缺失或投稿人拒绝补充材料的情况下。
+          </p>
+          <ul>
+            <li><strong>待核验：</strong>有原始材料，但无独立信源，建议先阅读评论区的讨论。</li>
+            <li><strong>部分印证：</strong>至少一处外部信息吻合，可信度高于纯匿名投稿。</li>
+            <li><strong>多方交叉：</strong>两个以上独立投稿人指向同一事件，通常出现在职场或社区事务类爆料中。</li>
+            <li><strong>存疑：</strong>证据链不完整或存在明显矛盾，阅读时需保持审慎。</li>
+          </ul>
+
+          <h3>三、不同类型爆料的消费节奏</h3>
+          <p>
+            职场内幕与消费维权类爆料通常更新较快，投稿人会在几天内补充新证据或回应质疑，适合持续追踪；社区事务与档案解封类则节奏较慢，一份档案的解读可能需要数周时间，但信息密度更高；科技产品类爆料往往涉及技术文档，需要读者具备一定背景知识才能判断字段清单的实际含义。比较合理的做法是：先按分类浏览标题，再根据核验状态决定是否深入阅读全文与评论区。
+          </p>
+
+          <h3>四、同类条目之间的比较维度</h3>
+          <p>
+            当同一事件出现多个投稿时，可以从三个维度进行比较：证据原始程度（聊天截图 &lt; 文档扫描件 &lt; 原始录音/视频）、投稿人立场一致性（是否存在利益关联）、以及时间线完整度（是否覆盖事件前后关键节点）。以近期「连锁餐饮后厨」条目为例，三份投稿分别提供了视频、员工口述与品牌方声明，将三者按时间排列后，可以发现清洁流程的争议集中在两个具体环节，而非整体操作规范。这种比较方式比单纯看热度更有参考价值。
+          </p>
+        </div>
+      </section>
+
+      <!-- 板块6：体验指南 -->
+      <section class="section-block" id="guide">
+        <div class="section-header">
+          <h2>体验指南：从哪类爆料开始看</h2>
+        </div>
+        <div class="guide-steps">
+          <div class="guide-step">
+            <div class="step-num">01</div>
+            <div class="step-content">
+              <h3>先浏览核验状态为「多方交叉」的条目</h3>
+              <p>这类条目通常已经过社区初步讨论，信息相对稳定，适合作为了解某一类型爆料的入口。例如「社区团购退货规则」与「物流分拣工资单」都属于此类。</p>
+            </div>
+          </div>
+          <div class="guide-step">
+            <div class="step-num">02</div>
+            <div class="step-content">
+              <h3>按分类索引切入自己熟悉的领域</h3>
+              <p>如果你对科技产品比较熟悉，可以直接进入「科技产品」分类，从技术文档类条目开始阅读，更容易判断字段清单的实际含义与边界。</p>
+            </div>
+          </div>
+          <div class="guide-step">
+            <div class="step-num">03</div>
+            <div class="step-content">
+              <h3>关注条目下方的评论区补充信息</h3>
+              <p>很多爆料的关键细节并不在正文中，而在评论区的用户补充里，例如前员工留言、时间线修正或外部链接引用。阅读评论区有助于快速判断该条目是否值得继续追踪。</p>
+            </div>
+          </div>
+          <div class="guide-step">
+            <div class="step-num">04</div>
+            <div class="step-content">
+              <h3>比较同类条目的证据原始程度</h3>
+              <p>当同一事件出现多个投稿时，优先阅读附带原始录音、视频或完整文档扫描件的版本，再参考文字口述类投稿，避免被单一叙述带偏。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 板块7：FAQ -->
+      <section class="section-block" id="faq">
+        <div class="section-header">
+          <h2>常见问答</h2>
+        </div>
+        <div class="faq-list">
+          <details>
+            <summary>爆料网上的条目一般多久更新一次？</summary>
+            <div class="faq-answer">更新频率取决于条目类型。职场与消费类爆料通常在发布后 24—72 小时内会有补充材料或投稿人回应；档案解封类节奏较慢，可能间隔数周才出现新的解读。热榜条目一般每天上午 9:30 前后刷新排序。</div>
+          </details>
+          <details>
+            <summary>「部分印证」和「多方交叉」有什么区别？</summary>
+            <div class="faq-answer">「部分印证」指社区找到了至少一个外部信息点与投稿内容吻合，但尚未达到多个独立信源交叉的程度；「多方交叉」则要求两个以上互不认识的投稿人指向同一事实，可信度更高。两者在条目顶部的核验标签中可以直接区分。</div>
+          </details>
+          <details>
+            <summary>第一次看爆料类内容，从哪个条目开始比较合适？</summary>
+            <div class="faq-answer">建议从核验状态为「多方交叉」且附带原始文档的条目开始，例如「城南旧事档案解封」或「物流分拣工资单」。这类条目证据链相对完整，评论区讨论也较为充分，便于建立对爆料类型的整体判断。</div>
+          </details>
+          <details>
+            <summary>匿名投稿的爆料可信度怎么判断？</summary>
+            <div class="faq-answer">可以先看投稿是否附带了可验证的材料类型（如文档编号、录音转文字、连续时间戳的视频），再看评论区是否有其他用户提供独立信息。如果投稿只有文字描述且拒绝补充任何原始材料，核验状态通常会标记为「存疑」。</div>
+          </details>
+          <details>
+            <summary>科技产品类爆料和消费维权类有什么不同？</summary>
+            <div class="faq-answer">科技产品类通常涉及技术文档、字段清单或算法逻辑，需要读者具备一定背景知识才能判断其实际影响；消费维权类更偏向操作流程与合同条款，证据多为图片、视频或聊天记录，阅读门槛较低但需要关注时间线是否完整。</div>
+          </details>
+          <details>
+            <summary>爆料网上的热度值是怎么来的？</summary>
+            <div class="faq-answer">热度值综合了条目在站内的阅读量、评论数、收藏数与分享次数，由系统自动计算。不同分类的热度基准不同，因此跨分类比较热度值的参考意义有限，建议在同一分类内比较。</div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 板块8：用户评论 -->
+      <section class="section-block" id="community">
+        <div class="section-header">
+          <h2>用户评论</h2>
+        </div>
+        <div class="comment-grid">
+          <div class="comment-card">
+            <div class="comment-header"><span class="comment-nick">深夜档案员</span><span class="comment-date">11-08 08:12</span></div>
+            <p class="comment-text">「城南旧事」那批扫描件里第三页的批注字迹和正文不是同一人写的，<strong>档案解封</strong>类条目最好多留意这种细节。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-header"><span class="comment-nick">后厨观察者</span><span class="comment-date">11-07 22:45</span></div>
+            <p class="comment-text">连锁餐饮那个视频我看完了，清洁流程的问题主要出在晚班交接时段，其他时段看起来正常。投稿人后来又补了一段监控，时间线能对上。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-header"><span class="comment-nick">字段猎人</span><span class="comment-date">11-07 19:30</span></div>
+            <p class="comment-text">智能硬件那份测试清单里的 Wi-Fi 指纹字段确实值得讨论，但清单没有注明采集频率，判断影响之前还需要更多上下文。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-header"><span class="comment-nick">夜班分拣员</span><span class="comment-date">11-07 15:20</span></div>
+            <p class="comment-text">工资单对比那篇写得挺实在，加班计算方式确实是临时工最容易踩坑的地方。希望投稿人能补充一下不同站点的时薪差异。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-header"><span class="comment-nick">社区观察站</span><span class="comment-date">11-06 21:10</span></div>
+            <p class="comment-text">共享办公空间消防验收记录那两条检查表，日期和编号能对上，但缺了验收结论页，暂时只能算<strong>部分印证</strong>。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-header"><span class="comment-nick">剧组盒饭侠</span><span class="comment-date">11-06 17:55</span></div>
+            <p class="comment-text">影视剧组超时工作那个爆料，制片主任的回应说得比较模糊，排期调整的具体方案还没看到，先观望。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-header"><span class="comment-nick">二手质检员</span><span class="comment-date">11-06 11:30</span></div>
+            <p class="comment-text">质检培训手册节选里关于屏幕划痕的判定标准，和我在门店看到的不太一样，可能不同区域执行有差异。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-header"><span class="comment-nick">团购小队长</span><span class="comment-date">11-05 20:40</span></div>
+            <p class="comment-text">退货门槛调整那个聊天记录，团长群里确实有人提过，但截图只截了一半，完整的通知还没放出来。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-header"><span class="comment-nick">简历过滤机</span><span class="comment-date">11-05 14:15</span></div>
+            <p class="comment-text">招聘平台关键词过滤那个口述，和我之前听到的版本基本一致，但没有书面材料，可信度只能算中等。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-header"><span class="comment-nick">长租租客A</span><span class="comment-date">11-04 23:05</span></div>
+            <p class="comment-text">退押金纠纷那篇整理的 12 条沟通记录很详细，合同条款对照也清楚，对正在处理类似问题的人有参考价值。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-header"><span class="comment-nick">物流老张</span><span class="comment-date">11-04 16:30</span></div>
+            <p class="comment-text">分拣临时工的夜班补贴确实每个站点不一样，工资单只能反映一个点的情况，建议横向多看几个投稿。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-header"><span class="comment-nick">档案翻页人</span><span class="comment-date">11-03 09:50</span></div>
+            <p class="comment-text">城南地块的规划调整时间线和公开报道基本吻合，但会议记录里提到的沟通对象还需要更多材料佐证。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 板块9：相关资讯 -->
+      <section class="section-block" id="news">
+        <div class="section-header">
+          <h2>相关资讯</h2>
+        </div>
+        <div class="news-list">
+          <article class="news-item">
+            <img src="https://picsum.photos/seed/zaixian-zixun01/600/400" alt="档案解封类投稿量上升资讯配图" width="600" height="400" loading="lazy">
+            <div class="news-body">
+              <h3>档案解封类投稿量周环比上升 22%</h3>
+              <div class="news-date">2026-11-08</div>
+              <p>过去一周内，社区新增档案解封类投稿 9 条，其中 4 条附带扫描件，投稿人集中关注社区事务与历史规划记录。</p>
+            </div>
+          </article>
+          <article class="news-item">
+            <img src="https://picsum.photos/seed/houchu-shipin02/600/400" alt="后厨视频证据讨论焦点资讯配图" width="600" height="400" loading="lazy">
+            <div class="news-body">
+              <h3>后厨视频证据成为消费维权类讨论焦点</h3>
+              <div class="news-date">2026-11-07</div>
+              <p>连锁餐饮后厨视频发布后，评论区围绕“原始视频与剪辑版本的区别”展开讨论，多位用户提供了设备时间戳的比对方法。</p>
+            </div>
+          </article>
+          <article class="news-item">
+            <img src="https://picsum.photos/seed/yinsi-bianjie03/600/400" alt="智能硬件隐私边界讨论配图" width="600" height="400" loading="lazy">
+            <div class="news-body">
+              <h3>智能硬件数据采集边界讨论升温</h3>
+              <div class="news-date">2026-11-06</div>
+              <p>技术社区用户对测试清单中的“Wi-Fi 指纹”字段展开辨析，部分用户指出该字段在不同固件版本中的采集方式存在差异。</p>
+            </div>
+          </article>
+          <article class="news-item">
+            <img src="https://picsum.photos/seed/gongzi-dan04/600/400" alt="物流工资单补充材料资讯配图" width="600" height="400" loading="lazy">
+            <div class="news-body">
+              <h3>物流分拣工资单条目获两位前员工补充</h3>
+              <div class="news-date">2026-11-05</div>
+              <p>投稿人在评论区补充了不同站点的时薪对照，两位前员工分别提供了 2025 年与 2026 年的工资条截图，显示基本时薪存在区域差异。</p>
+            </div>
+          </article>
+          <article class="news-item">
+            <img src="https://picsum.photos/seed/fanghuo-yanshou05/600/400" alt="共享办公消防验收记录资讯配图" width="600" height="400" loading="lazy">
+            <div class="news-body">
+              <h3>共享办公空间消防验收记录引发关注</h3>
+              <div class="news-date">2026-11-04</div>
+              <p>两份检查表扫描件显示验收日期与编号，但缺少结论页，社区用户正在尝试通过公开渠道交叉核对。</p>
+            </div>
+          </article>
+          <article class="news-item">
+            <img src="https://picsum.photos/seed/chaoshi-gongzuo06/600/400" alt="影视剧组超时工作回应资讯配图" width="600" height="400" loading="lazy">
+            <div class="news-body">
+              <h3>影视剧组超时工作爆料获制片方简短回应</h3>
+              <div class="news-date">2026-11-03</div>
+              <p>制片主任在评论区表示“排期已调整”，但未提供具体排班表，投稿人表示将继续补充现场记录。</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 板块10：相关推荐 -->
+      <section class="section-block" id="related">
+        <div class="section-header">
+          <h2>相关推荐</h2>
+        </div>
+        <div class="related-tags">
+          <a href="/#expose-picks">城南旧事档案</a>
+          <a href="/#expose-picks">后厨操作视频</a>
+          <a href="/#expose-picks">智能硬件数据清单</a>
+          <a href="/#expose-picks">分拣临时工工资单</a>
+          <a href="/#expose-picks">共享办公消防验收</a>
+          <a href="/#expose-picks">剧组超时工作</a>
+          <a href="/#expose-picks">二手平台质检</a>
+          <a href="/#expose-picks">社区团购退货</a>
+        </div>
+      </section>
+
+      <!-- 板块11：热门榜单 -->
+      <section class="section-block" id="hot-ranking">
+        <div class="section-header">
+          <h2>热门榜单</h2>
+          <span class="more-link" style="color:var(--gray-600);font-size:0.75rem;">11-08 09:30 更新</span>
+        </div>
+        <div class="sidebar-card" style="padding:1.1rem;">
+          <ul class="hot-list">
+            <li><span class="rank">1</span><span class="hot-title">「城南旧事」档案解封</span><span class="hot-count">9.2k</span></li>
+            <li><span class="rank">2</span><span class="hot-title">连锁餐饮后厨操作争议</span><span class="hot-count">8.7k</span></li>
+            <li><span class="rank">3</span><span class="hot-title">智能硬件数据采集清单</span><span class="hot-count">8.1k</span></li>
+            <li><span class="rank">4</span><span class="hot-title">物流分拣临时工工资单</span><span class="hot-count">7.4k</span></li>
+            <li><span class="rank">5</span><span class="hot-title">共享办公消防验收记录</span><span class="hot-count">6.8k</span></li>
+            <li><span class="rank">6</span><span class="hot-title">影视剧组超时工作</span><span class="hot-count">6.2k</span></li>
+            <li><span class="rank">7</span><span class="hot-title">二手平台质检流程</span><span class="hot-count">5.5k</span></li>
+            <li><span class="rank">8</span><span class="hot-title">社区团购退货规则</span><span class="hot-count">4.9k</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 板块12：事件时间线 -->
+      <section class="section-block" id="timeline">
+        <div class="section-header">
+          <h2>事件时间线</h2>
+        </div>
+        <div class="sidebar-card" style="padding:1.1rem;">
+          <ul class="timeline-mini">
+            <li><span class="t-date">10-28</span><span class="t-text">「城南旧事」首份扫描件投稿发布，标记为待核验。</span></li>
+            <li><span class="t-date">10-31</span><span class="t-text">第二位投稿人提供会议记录第 2—3 页，核验状态更新为部分印证。</span></li>
+            <li><span class="t-date">11-02</span><span class="t-text">连锁餐饮后厨视频投稿发布，品牌方当日未回应。</span></li>
+            <li><span class="t-date">11-04</span><span class="t-text">智能硬件数据清单投稿，技术社区开始字段辨析。</span></li>
+            <li><span class="t-date">11-06</span><span class="t-text">物流工资单获两位前员工补充，状态更新为多方交叉。</span></li>
+            <li><span class="t-date">11-08</span><span class="t-text">城南旧事新增第 4 页手写批注解读，热度升至榜首。</span></li>
+          </ul>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 右栏辅助 -->
+    <aside class="sidebar" aria-label="辅助信息">
+      <div class="sidebar-card">
+        <h3>🔥 爆料热榜</h3>
+        <ul class="hot-list">
+          <li><span class="rank">1</span><span class="hot-title">城南旧事档案解封</span><span class="hot-count">9.2k</span></li>
+          <li><span class="rank">2</span><span class="hot-title">连锁餐饮后厨争议</span><span class="hot-count">8.7k</span></li>
+          <li><span class="rank">3</span><span class="hot-title">智能硬件数据清单</span><span class="hot-count">8.1k</span></li>
+          <li><span class="rank">4</span><span class="hot-title">物流分拣工资单</span><span class="hot-count">7.4k</span></li>
+          <li><span class="rank">5</span><span class="hot-title">共享办公消防验收</span><span class="hot-count">6.8k</span></li>
+          <li><span class="rank">6</span><span class="hot-title">剧组超时工作爆料</span><span class="hot-count">6.2k</span></li>
+          <li><span class="rank">7</span><span class="hot-title">二手平台质检流程</span><span class="hot-count">5.5k</span></li>
+          <li><span class="rank">8</span><span class="hot-title">社区团购退货规则</span><span class="hot-count">4.9k</span></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>📅 今日更新</h3>
+        <ul class="timeline-mini">
+          <li><span class="t-date">09:30</span><span class="t-text">城南旧事档案新增批注解读</span></li>
+          <li><span class="t-date">08:15</span><span class="t-text">后厨视频品牌方声明发布</span></li>
+          <li><span class="t-date">昨天</span><span class="t-text">智能硬件清单讨论热度上升</span></li>
+          <li><span class="t-date">11-07</span><span class="t-text">物流工资单获前员工补充</span></li>
+          <li><span class="t-date">11-06</span><span class="t-text">质检培训手册节选投稿</span></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-card">
+        <h3>📌 快速入口</h3>
+        <div class="related-tags" style="gap:0.4rem;">
+          <a href="/#expose-picks">精选爆料</a>
+          <a href="/#latest-updates">最新动态</a>
+          <a href="/#categories">分类索引</a>
+          <a href="/#deep-dive">深度解析</a>
+          <a href="/#faq">常见问答</a>
+          <a href="/#community">用户评论</a>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- 页尾 -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="brand-name-footer">爆料网</div>
+        <p>汇聚匿名投稿、内幕线索与事件追踪的垂直社区，提供爆料热榜、时间线与可信度辨析参考。</p>
+      </div>
+      <div class="footer-col">
+        <h4>频道</h4>
+        <ul>
+          <li><a href="/#expose-picks">精选爆料</a></li>
+          <li><a href="/#latest-updates">最新动态</a></li>
+          <li><a href="/#categories">分类索引</a></li>
+          <li><a href="/#deep-dive">深度解析</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>社区</h4>
+        <ul>
+          <li><a href="/#community">用户评论</a></li>
+          <li><a href="/#faq">常见问答</a></li>
+          <li><a href="/#hot-ranking">热门榜单</a></li>
+          <li><a href="/#timeline">事件时间线</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>资讯</h4>
+        <ul>
+          <li><a href="/#news">相关资讯</a></li>
+          <li><a href="/#related">相关推荐</a></li>
+          <li><a href="/#overview">领域概览</a></li>
+          <li><a href="/#guide">体验指南</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 爆料网 · 内容聚合展示 · 部分内容为示例数据，仅用于展示页面结构</span>
+      <span>社区内容不构成事实认定，请独立判断</span>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      // 本地内容查找
+      const searchInput = document.getElementById('searchInput');
+      const searchBtn = document.getElementById('searchBtn');
+      const cardGrid = document.getElementById('cardGrid');
+      const noResults = document.getElementById('noResults');
+      const allCards = cardGrid ? Array.from(cardGrid.querySelectorAll('.expose-card')) : [];
+
+      function performSearch() {
+        if (!searchInput || !cardGrid) return;
+        const query = searchInput.value.trim().toLowerCase();
+        if (!query) {
+          allCards.forEach(card => {
+            card.style.display = '';
+            card.querySelectorAll('.search-highlight').forEach(el => {
+              const parent = el.parentNode;
+              parent.replaceChild(document.createTextNode(el.textContent), el);
+              parent.normalize();
+            });
+          });
+          if (noResults) noResults.classList.remove('visible');
+          return;
+        }
+        let visibleCount = 0;
+        allCards.forEach(card => {
+          const keywords = (card.getAttribute('data-keywords') || '').toLowerCase();
+          const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+          const excerpt = card.querySelector('.excerpt')?.textContent.toLowerCase() || '';
+          const tags = Array.from(card.querySelectorAll('.tag')).map(t => t.textContent.toLowerCase()).join(' ');
+          const match = keywords.includes(query) || title.includes(query) || excerpt.includes(query) || tags.includes(query);
+          card.style.display = match ? '' : 'none';
+          if (match) visibleCount++;
+        });
+        if (noResults) {
+          if (visibleCount === 0) {
+            noResults.classList.add('visible');
+          } else {
+            noResults.classList.remove('visible');
+          }
+        }
+      }
+
+      if (searchBtn && searchInput) {
+        searchBtn.addEventListener('click', performSearch);
+        searchInput.addEventListener('input', performSearch);
+        searchInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            performSearch();
+          }
+        });
+      }
+
+      // 频道导航点击滚动偏移已通过 CSS scroll-padding-top 处理
+    })();
+  </script>
+</body>
+  </html>
