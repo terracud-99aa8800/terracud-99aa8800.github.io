@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>瓜子漫画免费入口 - 全品类漫画在线浏览</title>
+  <meta name="description" content="瓜子漫画免费入口提供全品类漫画在线浏览：热血、恋爱、悬疑、古风、科幻、日常等具体条目与更新动态。适合漫画读者查找最新话、分类榜单和社区评论。">
+  <meta name="keywords" content="全品类漫画, 热血漫画, 恋爱漫画, 悬疑漫画, 古风漫画">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23f5a623'/%3E%3Cpath d='M10 12h12v2H10zm0 5h12v2H10zm0 5h8v2h-8z' fill='%23222'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --color-primary: #f5a623;
+      --color-primary-dark: #d18a1c;
+      --color-bg: #faf8f5;
+      --color-panel: #ffffff;
+      --color-text: #1e1e1e;
+      --color-text-secondary: #5e5e5e;
+      --color-border: #e8e1d9;
+      --color-accent: #3a7ca5;
+      --color-accent-soft: #e7f0f7;
+      --color-warm-soft: #fff3e0;
+      --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.05);
+      --sticky-height: 96px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-padding-top: var(--sticky-height); }
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+    a { color: var(--color-accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ul { list-style: none; }
+    img { display: block; max-width: 100%; height: auto; }
+    button { font: inherit; cursor: pointer; }
+    .container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    /* 吸顶公告条 + 页头 */
+    .sticky-wrapper {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--color-panel);
+      box-shadow: var(--shadow-sm);
+    }
+    .announcement-bar {
+      background: var(--color-primary);
+      color: #1e1e1e;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 0;
+      text-align: center;
+      letter-spacing: 0.3px;
+    }
+    .announcement-bar .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .site-header {
+      background: var(--color-panel);
+      border-bottom: 1px solid var(--color-border);
+      padding: 12px 0;
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--color-text);
+    }
+    .brand svg { width: 36px; height: 36px; }
+    .header-nav {
+      display: flex;
+      gap: 24px;
+      font-size: 15px;
+      flex-wrap: wrap;
+    }
+    .header-nav a { color: var(--color-text); font-weight: 500; }
+    .header-nav a:hover { color: var(--color-primary-dark); text-decoration: none; }
+    .quick-entry {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .quick-entry .search-input {
+      border: 1px solid var(--color-border);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 14px;
+      min-width: 160px;
+      background: #f9f6f2;
+    }
+    .quick-entry .search-input:focus {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 1px;
+    }
+    /* 首屏 */
+    .hero {
+      padding: 40px 0 32px;
+      background: linear-gradient(135deg, #fff9ef 0%, #faf8f5 100%);
+    }
+    .hero-inner {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .hero-content { flex: 1 1 400px; }
+    .hero-content h1 {
+      font-size: 2.6rem;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+    .hero-content .hero-desc {
+      font-size: 1.1rem;
+      color: var(--color-text-secondary);
+      max-width: 560px;
+      margin-bottom: 24px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 24px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 15px;
+      border: none;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-primary {
+      background: var(--color-primary);
+      color: #1e1e1e;
+    }
+    .btn-primary:hover { background: var(--color-primary-dark); text-decoration: none; }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--color-primary);
+      color: var(--color-text);
+    }
+    .btn-outline:hover { background: var(--color-warm-soft); text-decoration: none; }
+    .hero-visual {
+      flex: 0 0 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-visual svg {
+      width: 100%;
+      max-width: 280px;
+      height: auto;
+    }
+    /* 三栏门户布局 */
+    .portal-layout {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr) 260px;
+      gap: 28px;
+      padding: 32px 0;
+    }
+    /* 左频道索引 */
+    .channel-sidebar {
+      position: sticky;
+      top: calc(var(--sticky-height) + 20px);
+      align-self: start;
+    }
+    .channel-sidebar h2 {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-text-secondary);
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+    .channel-list li { margin-bottom: 6px; }
+    .channel-list a {
+      display: block;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      color: var(--color-text);
+      font-size: 15px;
+      transition: background 0.15s;
+    }
+    .channel-list a:hover { background: var(--color-warm-soft); text-decoration: none; }
+    .channel-list .active {
+      background: var(--color-primary);
+      color: #1e1e1e;
+      font-weight: 600;
+    }
+    /* 主内容区 */
+    .main-content { min-width: 0; }
+    .section {
+      margin-bottom: 40px;
+      scroll-margin-top: var(--sticky-height);
+    }
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .section-header h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .section-header .more-link { font-size: 14px; color: var(--color-accent); white-space: nowrap; }
+    .section-desc {
+      color: var(--color-text-secondary);
+      font-size: 15px;
+      margin-bottom: 16px;
+      max-width: 720px;
+    }
+    /* 卡片网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 18px;
+    }
+    .card {
+      background: var(--color-panel);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s, transform 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .card img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+    .card-body { padding: 12px; flex: 1; display: flex; flex-direction: column; }
+    .card-body h3 { font-size: 1rem; margin-bottom: 6px; line-height: 1.3; }
+    .card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+    .tag {
+      background: var(--color-warm-soft);
+      color: #7a5a1e;
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-weight: 500;
+    }
+    .tag-accent { background: var(--color-accent-soft); color: var(--color-accent); }
+    .card-desc { font-size: 13px; color: var(--color-text-secondary); line-height: 1.4; margin-bottom: 8px; flex: 1; }
+    .card-meta { display: flex; justify-content: space-between; font-size: 12px; color: #8a8a8a; }
+    /* 紧凑列表 */
+    .compact-list { background: var(--color-panel); border-radius: var(--radius-md); overflow: hidden; }
+    .compact-list-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--color-border);
+      font-size: 15px;
+    }
+    .compact-list-item:last-child { border-bottom: none; }
+    .compact-list-item .title { font-weight: 600; min-width: 120px; }
+    .compact-list-item .summary { color: var(--color-text-secondary); font-size: 14px; flex: 1; }
+    .compact-list-item .time { font-size: 12px; color: #9a9a9a; white-space: nowrap; }
+    /* 分类入口网格 */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .category-btn {
+      background: var(--color-panel);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: 12px 8px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--color-text);
+      transition: background 0.15s, border-color 0.15s;
+      display: block;
+    }
+    .category-btn:hover {
+      background: var(--color-warm-soft);
+      border-color: var(--color-primary);
+      text-decoration: none;
+    }
+    .category-btn .count { display: block; font-weight: 400; font-size: 12px; color: var(--color-text-secondary); margin-top: 4px; }
+    /* 深度解析 */
+    .deep-dive {
+      background: var(--color-panel);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .deep-dive h3 {
+      font-size: 1.2rem;
+      margin: 20px 0 10px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--color-warm-soft);
+    }
+    .deep-dive h3:first-of-type { margin-top: 0; }
+    .deep-dive p { margin-bottom: 14px; color: #2e2e2e; }
+    .deep-dive ul { margin: 0 0 16px 20px; list-style: disc; color: #2e2e2e; }
+    .deep-dive li { margin-bottom: 6px; }
+    /* 体验指南 */
+    .guide-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .step-card {
+      background: var(--color-panel);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      box-shadow: var(--shadow-sm);
+      border-left: 4px solid var(--color-primary);
+    }
+    .step-card .step-num {
+      display: inline-block;
+      background: var(--color-primary);
+      color: #1e1e1e;
+      width: 28px;
+      height: 28px;
+      line-height: 28px;
+      text-align: center;
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    .step-card h3 { font-size: 1rem; margin-bottom: 6px; }
+    .step-card p { font-size: 14px; color: var(--color-text-secondary); }
+    /* FAQ */
+    .faq-list { display: flex; flex-direction: column; gap: 10px; }
+    details {
+      background: var(--color-panel);
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--color-border);
+    }
+    details summary {
+      font-weight: 600;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    details summary::-webkit-details-marker { display: none; }
+    details summary::after {
+      content: '+';
+      font-size: 1.2rem;
+      color: var(--color-primary-dark);
+      font-weight: 400;
+    }
+    details[open] summary::after { content: '−'; }
+    details p { margin-top: 10px; color: var(--color-text-secondary); font-size: 15px; }
+    /* 评论 */
+    .comment-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 14px;
+    }
+    .comment-card {
+      background: var(--color-panel);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      box-shadow: var(--shadow-sm);
+    }
+    .comment-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--color-warm-soft);
+      color: var(--color-primary-dark);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 14px;
+    }
+    .comment-nick { font-weight: 600; font-size: 14px; }
+    .comment-text { font-size: 14px; color: #3a3a3a; line-height: 1.5; }
+    .comment-meta { font-size: 12px; color: #9a9a9a; margin-top: 6px; }
+    /* 资讯列表 */
+    .news-list { display: flex; flex-direction: column; gap: 16px; }
+    .news-item {
+      display: flex;
+      gap: 16px;
+      background: var(--color-panel);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      box-shadow: var(--shadow-sm);
+      align-items: flex-start;
+    }
+    .news-item img {
+      width: 100px;
+      height: 75px;
+      object-fit: cover;
+      border-radius: var(--radius-sm);
+      flex-shrink: 0;
+    }
+    .news-item .news-content h3 { font-size: 1rem; margin-bottom: 4px; }
+    .news-item .news-content .date { font-size: 12px; color: #9a9a9a; margin-bottom: 4px; }
+    .news-item .news-content p { font-size: 14px; color: var(--color-text-secondary); }
+    /* 相关推荐 */
+    .tag-index {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .tag-index a {
+      background: var(--color-panel);
+      border: 1px solid var(--color-border);
+      border-radius: 30px;
+      padding: 6px 16px;
+      font-size: 14px;
+      color: var(--color-text);
+      transition: background 0.15s;
+    }
+    .tag-index a:hover { background: var(--color-warm-soft); text-decoration: none; }
+    /* 热门榜单 */
+    .ranking-list {
+      background: var(--color-panel);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .ranking-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--color-border);
+      gap: 14px;
+    }
+    .ranking-item:last-child { border-bottom: none; }
+    .rank-num {
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--color-primary-dark);
+      width: 28px;
+      text-align: center;
+    }
+    .rank-title { font-weight: 600; flex: 1; }
+    .rank-score { font-size: 13px; color: #9a9a9a; }
+    /* 右辅助栏 */
+    .right-sidebar {
+      position: sticky;
+      top: calc(var(--sticky-height) + 20px);
+      align-self: start;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .sidebar-widget {
+      background: var(--color-panel);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      box-shadow: var(--shadow-sm);
+    }
+    .sidebar-widget h2 {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-text-secondary);
+      margin-bottom: 14px;
+      font-weight: 600;
+    }
+    .update-stream .update-item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      padding: 8px 0;
+      border-bottom: 1px dashed var(--color-border);
+    }
+    .update-stream .update-item:last-child { border-bottom: none; }
+    .update-stream .update-title { font-weight: 500; }
+    .update-stream .update-time { font-size: 12px; color: #9a9a9a; }
+    .hot-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .hot-tags a {
+      background: var(--color-warm-soft);
+      padding: 4px 10px;
+      border-radius: 16px;
+      font-size: 13px;
+      color: #7a5a1e;
+    }
+    .hot-tags a:hover { text-decoration: none; background: #ffe6c0; }
+    /* 页尾 */
+    .site-footer {
+      background: #1e1e1e;
+      color: #b0b0b0;
+      padding: 40px 0 24px;
+      margin-top: 40px;
+      font-size: 14px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 24px;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 10px; }
+    .footer-desc { font-size: 14px; color: #9a9a9a; max-width: 280px; }
+    .footer-col h3 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; color: #fff; margin-bottom: 12px; }
+    .footer-col ul li { margin-bottom: 8px; }
+    .footer-col a { color: #b0b0b0; }
+    .footer-col a:hover { color: #fff; }
+    .footer-bottom {
+      border-top: 1px solid #333;
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 13px;
+      color: #7a7a7a;
+    }
+    /* 响应式 */
+    @media (max-width: 1024px) {
+      .portal-layout {
+        grid-template-columns: 170px minmax(0, 1fr);
+      }
+      .right-sidebar {
+        grid-column: 1 / -1;
+        position: static;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+      }
+    }
+    @media (max-width: 740px) {
+      .portal-layout { grid-template-columns: 1fr; }
+      .channel-sidebar {
+        position: static;
+        margin-bottom: 20px;
+      }
+      .channel-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .channel-list li { margin-bottom: 0; }
+      .channel-list a { padding: 6px 12px; background: var(--color-panel); border: 1px solid var(--color-border); }
+      .right-sidebar { grid-template-columns: 1fr; }
+      .hero-content h1 { font-size: 2rem; }
+      .category-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr; gap: 20px; }
+      .header-nav { gap: 14px; font-size: 14px; }
+      .compact-list-item { flex-wrap: wrap; }
+      .compact-list-item .title { min-width: 100%; }
+    }
+  </style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+  <div class="sticky-wrapper">
+    <div class="announcement-bar">
+      <div class="container">
+        <span>📢 本周新增 12 部漫画 · 11 月 8 日更新《夜隐者》第 8 话</span>
+      </div>
+    </div>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="/" class="brand">
+          <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="18" cy="18" r="16" fill="#f5a623" />
+            <path d="M12 14h12v2H12zm0 4h12v2H12zm0 4h8v2h-8z" fill="#1e1e1e" />
+          </svg>
+          <span>瓜子漫画免费入口</span>
+        </a>
+        <nav class="header-nav">
+          <a href="#featured">精选推荐</a>
+          <a href="#latest">最新更新</a>
+          <a href="#categories">分类</a>
+          <a href="#deep-dive">深度解析</a>
+          <a href="#faq">常见问题</a>
+        </nav>
+        <div class="quick-entry">
+          <input type="search" class="search-input" placeholder="搜索漫画、作者…" aria-label="搜索漫画">
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-content">
+          <h1>瓜子漫画免费入口</h1>
+          <p class="hero-desc">汇聚热血、恋爱、悬疑、古风、科幻、日常等全品类漫画，提供最新话更新、分类榜单与社区评论，方便你快速找到想读的条目。</p>
+          <div class="hero-actions">
+            <a href="#featured" class="btn btn-primary">浏览精选漫画</a>
+            <a href="#latest" class="btn btn-outline">查看今日更新</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <svg viewBox="0 0 280 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="40" y="30" width="200" height="160" rx="12" fill="#fff3e0" stroke="#f5a623" stroke-width="2"/>
+            <rect x="60" y="50" width="160" height="30" rx="4" fill="#f5a623" opacity="0.3"/>
+            <rect x="60" y="95" width="120" height="12" rx="4" fill="#d18a1c" opacity="0.5"/>
+            <rect x="60" y="115" width="160" height="12" rx="4" fill="#d18a1c" opacity="0.3"/>
+            <rect x="60" y="135" width="140" height="12" rx="4" fill="#d18a1c" opacity="0.3"/>
+            <circle cx="200" cy="150" r="28" fill="#f5a623" opacity="0.8"/>
+            <path d="M192 146l6 6 12-12" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="90" y="170" width="100" height="6" rx="3" fill="#e8e1d9"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <div class="container portal-layout">
+      <!-- 左频道索引 -->
+      <aside class="channel-sidebar">
+        <h2>频道分类</h2>
+        <ul class="channel-list">
+          <li><a href="#categories" class="active">全部漫画</a></li>
+          <li><a href="#categories">热血</a></li>
+          <li><a href="#categories">恋爱</a></li>
+          <li><a href="#categories">悬疑</a></li>
+          <li><a href="#categories">古风</a></li>
+          <li><a href="#categories">科幻</a></li>
+          <li><a href="#categories">日常</a></li>
+          <li><a href="#categories">奇幻</a></li>
+          <li><a href="#categories">校园</a></li>
+          <li><a href="#categories">治愈</a></li>
+        </ul>
+      </aside>
+
+      <!-- 主内容区 -->
+      <div class="main-content">
+        <!-- 板块1：主题领域概览 -->
+        <section class="section" id="overview">
+          <div class="section-header">
+            <h2>题材方向与近期值得关注的内容</h2>
+          </div>
+          <p class="section-desc">瓜子漫画免费入口涵盖的热门方向包括热血少年、恋爱日常、悬疑推理、古风权谋、科幻末世、治愈系日常等。近期《夜隐者》《春日便当》《第七号档案》等条目更新频繁，社区讨论集中在剧情转折和画风表现上。读者可以按类型、更新节奏和评分快速筛选。</p>
+        </section>
+
+        <!-- 板块2：精选内容推荐 -->
+        <section class="section" id="featured">
+          <div class="section-header">
+            <h2>精选漫画条目推荐</h2>
+            <a href="#latest" class="more-link">查看更多更新 →</a>
+          </div>
+          <div class="card-grid">
+            <article class="card">
+              <img src="https://picsum.photos/seed/yeyinzhe01/400/300" alt="《夜隐者》漫画封面" width="400" height="300" loading="lazy">
+              <div class="card-body">
+                <h3>夜隐者</h3>
+                <div class="card-tags"><span class="tag">悬疑</span><span class="tag tag-accent">超能力</span></div>
+                <p class="card-desc">都市夜晚的异能侦探故事，主角通过影子追踪线索，第 8 话揭露关键证人。</p>
+                <div class="card-meta"><span>评分 9.2</span><span>更新至第8话</span></div>
+              </div>
+            </article>
+            <article class="card">
+              <img src="https://picsum.photos/seed/chunribiandang02/400/300" alt="《春日便当》漫画封面" width="400" height="300" loading="lazy">
+              <div class="card-body">
+                <h3>春日便当</h3>
+                <div class="card-tags"><span class="tag">恋爱</span><span class="tag tag-accent">校园</span></div>
+                <p class="card-desc">料理社少女与转学生的便当交换日常，第 15 话出现文化祭告白名场面。</p>
+                <div class="card-meta"><span>评分 9.5</span><span>更新至第15话</span></div>
+              </div>
+            </article>
+            <article class="card">
+              <img src="https://picsum.photos/seed/diqihao03/400/300" alt="《第七号档案》漫画封面" width="400" height="300" loading="lazy">
+              <div class="card-body">
+                <h3>第七号档案</h3>
+                <div class="card-tags"><span class="tag">悬疑</span><span class="tag tag-accent">刑侦</span></div>
+                <p class="card-desc">档案科新人翻出尘封旧案，每卷独立案件又暗藏主线，第 3 卷已完结。</p>
+                <div class="card-meta"><span>评分 9.0</span><span>全3卷</span></div>
+              </div>
+            </article>
+            <article class="card">
+              <img src="https://picsum.photos/seed/jianyu04/400/300" alt="《剑与山河》漫画封面" width="400" height="300" loading="lazy">
+              <div class="card-body">
+                <h3>剑与山河</h3>
+                <div class="card-tags"><span class="tag">古风</span><span class="tag tag-accent">武侠</span></div>
+                <p class="card-desc">少年剑客护送前朝公主复国，打斗分镜和服饰考据受到读者好评。</p>
+                <div class="card-meta"><span>评分 8.8</span><span>更新至第22话</span></div>
+              </div>
+            </article>
+            <article class="card">
+              <img src="https://picsum.photos/seed/xingji05/400/300" alt="《星轨之外》漫画封面" width="400" height="300" loading="lazy">
+              <div class="card-body">
+                <h3>星轨之外</h3>
+                <div class="card-tags"><span class="tag">科幻</span><span class="tag tag-accent">太空</span></div>
+                <p class="card-desc">货运飞船船员在废弃空间站发现活体植物，硬科幻设定与幽闭恐惧结合。</p>
+                <div class="card-meta"><span>评分 9.1</span><span>更新至第9话</span></div>
+              </div>
+            </article>
+            <article class="card">
+              <img src="https://picsum.photos/seed/richang06/400/300" alt="《猫与便利店》漫画封面" width="400" height="300" loading="lazy">
+              <div class="card-body">
+                <h3>猫与便利店</h3>
+                <div class="card-tags"><span class="tag">日常</span><span class="tag tag-accent">治愈</span></div>
+                <p class="card-desc">夜班店员和流浪猫的短篇单元故事，每话一个顾客的暖心小故事。</p>
+                <div class="card-meta"><span>评分 9.4</span><span>更新至第30话</span></div>
+              </div>
+            </article>
+            <article class="card">
+              <img src="https://picsum.photos/seed/qihuan07/400/300" alt="《雾海旅人》漫画封面" width="400" height="300" loading="lazy">
+              <div class="card-body">
+                <h3>雾海旅人</h3>
+                <div class="card-tags"><span class="tag">奇幻</span><span class="tag tag-accent">冒险</span></div>
+                <p class="card-desc">少女驾驶热气球穿越迷雾之海寻找失踪父亲，画风细腻，世界观宏大。</p>
+                <div class="card-meta"><span>评分 8.7</span><span>更新至第12话</span></div>
+              </div>
+            </article>
+            <article class="card">
+              <img src="https://picsum.photos/seed/redxue08/400/300" alt="《热血拳击社》漫画封面" width="400" height="300" loading="lazy">
+              <div class="card-body">
+                <h3>热血拳击社</h3>
+                <div class="card-tags"><span class="tag">热血</span><span class="tag tag-accent">运动</span></div>
+                <p class="card-desc">弱鸡新生加入濒临废部的拳击社，用努力和策略挑战强敌，王道热血展开。</p>
+                <div class="card-meta"><span>评分 8.9</span><span>更新至第18话</span></div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- 板块3：最新更新 / 动态 -->
+        <section class="section" id="latest">
+          <div class="section-header">
+            <h2>最新更新与动态</h2>
+          </div>
+          <div class="compact-list">
+            <div class="compact-list-item">
+              <span class="title">夜隐者</span>
+              <span class="summary">第 8 话「影子的证词」已上线，关键证人现身。</span>
+              <span class="time">今天 09:30</span>
+            </div>
+            <div class="compact-list-item">
+              <span class="title">春日便当</span>
+              <span class="summary">第 15 话「文化祭的告白」更新，人气投票第一。</span>
+              <span class="time">今天 08:15</span>
+            </div>
+            <div class="compact-list-item">
+              <span class="title">星轨之外</span>
+              <span class="summary">第 9 话「温室回声」解锁，飞船植物出现异常。</span>
+              <span class="time">昨天 21:10</span>
+            </div>
+            <div class="compact-list-item">
+              <span class="title">第七号档案</span>
+              <span class="summary">第 3 卷单行本追加番外篇「档案室的午后」。</span>
+              <span class="time">昨天 16:45</span>
+            </div>
+            <div class="compact-list-item">
+              <span class="title">剑与山河</span>
+              <span class="summary">第 22 话「雪夜行军」更新，武打分镜获好评。</span>
+              <span class="time">11 月 6 日</span>
+            </div>
+            <div class="compact-list-item">
+              <span class="title">猫与便利店</span>
+              <span class="summary">第 30 话「跨年夜班」更新，单元故事进入最终章。</span>
+              <span class="time">11 月 5 日</span>
+            </div>
+            <div class="compact-list-item">
+              <span class="title">雾海旅人</span>
+              <span class="summary">第 12 话「风暴眼」更新，主角团遭遇空贼。</span>
+              <span class="time">11 月 4 日</span>
+            </div>
+            <div class="compact-list-item">
+              <span class="title">热血拳击社</span>
+              <span class="summary">第 18 话「第十回合」更新，主角挑战地区冠军。</span>
+              <span class="time">11 月 3 日</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 板块4：分类入口 -->
+        <section class="section" id="categories">
+          <div class="section-header">
+            <h2>按题材分类浏览</h2>
+          </div>
+          <div class="category-grid">
+            <a href="#featured" class="category-btn">热血<span class="count">42 部</span></a>
+            <a href="#featured" class="category-btn">恋爱<span class="count">68 部</span></a>
+            <a href="#featured" class="category-btn">悬疑<span class="count">35 部</span></a>
+            <a href="#featured" class="category-btn">古风<span class="count">51 部</span></a>
+            <a href="#featured" class="category-btn">科幻<span class="count">27 部</span></a>
+            <a href="#featured" class="category-btn">日常<span class="count">46 部</span></a>
+            <a href="#featured" class="category-btn">奇幻<span class="count">39 部</span></a>
+            <a href="#featured" class="category-btn">校园<span class="count">33 部</span></a>
+          </div>
+        </section>
+
+        <!-- 板块5：深度解析正文 -->
+        <section class="section" id="deep-dive">
+          <div class="section-header">
+            <h2>深度解析：不同题材的阅读特点与评判维度</h2>
+          </div>
+          <div class="deep-dive">
+            <h3>热血少年漫画的节奏与燃点设计</h3>
+            <p>热血类作品通常围绕主角成长、团队羁绊和阶段性对手展开。以《热血拳击社》为例，它用“弱鸡逆袭”的经典框架，但在战术设计上加入拳击规则细节，让每场比赛的胜负都有迹可循。判断一部热血漫是否值得追，可以看三点：一是战斗逻辑是否自洽，二是配角是否有独立动机，三是每话结尾是否制造合理的悬念。如果一部作品连续三话只靠“吼叫”推进，说明节奏可能注水。</p>
+            <h3>恋爱日常与情绪铺陈</h3>
+            <p>《春日便当》这类校园恋爱漫画的吸引力在于细腻的情绪递进。好的恋爱漫不会让主角在第 3 话就确定关系，而是用共享午餐、文化祭准备、雨天借伞等生活细节慢慢积累。读者在挑选时，可以关注作者是否擅长用“小物件”推动关系——便当里的菜色变化、手机消息的已读不回、放学路上的偶遇频率，都是情绪线索。如果一部恋爱漫画超过 10 话还没有任何关系进展，就要考虑是否拖沓。</p>
+            <h3>悬疑推理的信息释放与公平性</h3>
+            <p>悬疑漫画的核心是“读者与侦探共享信息”。像《第七号档案》每卷完结一个案件，卷内会提前给出所有关键线索，读者理论上可以在揭露前自行推理。评判悬疑漫的标准包括：线索是否公平、反转是否有伏笔、凶手动机是否合理。《夜隐者》则偏向超自然悬疑，利用“影子追踪”设定制造信息差，更考验作者对规则的限制能力——能力越强，限制越要清晰。</p>
+            <h3>古风与科幻的设定考据</h3>
+            <p>古风武侠如《剑与山河》注重礼仪、服饰、兵器形制的自洽；科幻如《星轨之外》则要求物理设定或技术逻辑没有明显硬伤。读者在筛选时，可以先翻看评论区或设定集，看作者是否在细节上做过功课。古风漫画如果出现明显的现代用语或穿越感道具，容易破坏沉浸感；科幻漫画如果“万能科技”解决一切冲突，也会降低阅读乐趣。</p>
+            <ul>
+              <li><strong>更新稳定性：</strong>周更、半月更、月更直接影响追读体验，优先选择有固定更新日的作品。</li>
+              <li><strong>卷均评分：</strong>参考多个读者的综合评分，避免只看单话。</li>
+              <li><strong>画风一致性：</strong>部分作品前期与后期画风差异过大，可以试读前 3 话再决定。</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 板块6：体验指南 -->
+        <section class="section" id="guide">
+          <div class="section-header">
+            <h2>从哪开始读：内容消费顺序与判断依据</h2>
+          </div>
+          <div class="guide-steps">
+            <div class="step-card">
+              <span class="step-num">1</span>
+              <h3>先确定偏好的情绪类型</h3>
+              <p>想放松就看《猫与便利店》《春日便当》；想紧张刺激选《夜隐者》《第七号档案》；想热血沸腾则从《热血拳击社》开始。</p>
+            </div>
+            <div class="step-card">
+              <span class="step-num">2</span>
+              <h3>试读前 3 话判断画风与节奏</h3>
+              <p>大部分漫画前 3 话会确立基本世界观和主角目标。如果第 3 话结尾仍没有让你想追下去的钩子，可以暂时放下。</p>
+            </div>
+            <div class="step-card">
+              <span class="step-num">3</span>
+              <h3>对比更新频率与已完结卷数</h3>
+              <p>时间有限优先选择已完结或接近完结的作品，如《第七号档案》全 3 卷；喜欢追更讨论则选周更中的《夜隐者》。</p>
+            </div>
+            <div class="step-card">
+              <span class="step-num">4</span>
+              <h3>参考同类型读者的具体评价</h3>
+              <p>看评论时注意具体描述——“打斗分镜流畅”“伏笔回收完整”比“好看”更有参考价值。</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 板块7：FAQ -->
+        <section class="section" id="faq">
+          <div class="section-header">
+            <h2>常见问题</h2>
+          </div>
+          <div class="faq-list">
+            <details>
+              <summary>瓜子漫画免费入口里的漫画一般多久更新一次？</summary>
+              <p>不同作品更新节奏不同。热门连载如《夜隐者》《春日便当》通常每周更新一话，部分作品为半月更或月更。已完结作品如《第七号档案》全 3 卷可直接阅读。具体更新时间可关注各条目的更新标识。</p>
+            </details>
+            <details>
+              <summary>《夜隐者》和《第七号档案》都是悬疑，有什么区别？</summary>
+              <p>《夜隐者》偏向超自然悬疑，主角拥有影子追踪能力，剧情围绕异能犯罪展开；《第七号档案》是刑侦推理，以档案科翻查旧案为主线，更注重逻辑推演和证据链。两者悬疑方向不同，可依偏好选择。</p>
+            </details>
+            <details>
+              <summary>第一次接触瓜子漫画，从哪部开始看比较好？</summary>
+              <p>如果喜欢轻松治愈，推荐《猫与便利店》或《春日便当》；如果偏好紧张剧情，可以从《第七号档案》第一卷开始；想体验王道热血则选《热血拳击社》。这几部开篇都比较友好，容易进入。</p>
+            </details>
+            <details>
+              <summary>恋爱漫画《春日便当》现在讲到哪了？</summary>
+              <p>截至 2026 年 11 月 8 日，《春日便当》已更新至第 15 话「文化祭的告白」，主角之间的感情有明确进展，文化祭篇是当前讨论焦点。</p>
+            </details>
+            <details>
+              <summary>科幻漫画《星轨之外》的设定复杂吗？</summary>
+              <p>《星轨之外》属于硬科幻方向，涉及飞船系统、植物生态和空间站结构，但作者会在每话末尾附一页设定小贴士，帮助理解。即使不是科幻迷也能跟上主线。</p>
+            </details>
+            <details>
+              <summary>古风漫画《剑与山河》的武打场面多吗？</summary>
+              <p>《剑与山河》以剧情和人物关系为主，武打场面约占每话三分之一，但分镜质量较高，第 22 话「雪夜行军」的战斗被不少读者评价为近期最佳。</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- 板块8：用户评论 -->
+        <section class="section" id="comments">
+          <div class="section-header">
+            <h2>读者评论</h2>
+          </div>
+          <div class="comment-list">
+            <div class="comment-card">
+              <div class="comment-header"><span class="avatar">漫</span><span class="comment-nick">漫画旅人</span></div>
+              <p class="comment-text">《夜隐者》第8话那个影子反转真的没想到，作者埋了七话的伏笔。</p>
+              <div class="comment-meta">今天 10:22</div>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header"><span class="avatar">便</span><span class="comment-nick">便当爱好者</span></div>
+              <p class="comment-text">春日便当15话告白场景画得太好了，料理社的群像也很温暖。</p>
+              <div class="comment-meta">今天 09:05</div>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header"><span class="avatar">档</span><span class="comment-nick">档案科小张</span></div>
+              <p class="comment-text">第七号档案第二卷的凶手我猜到了，但动机确实没想到，推理公平。</p>
+              <div class="comment-meta">昨天 22:40</div>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header"><span class="avatar">剑</span><span class="comment-nick">剑气长河</span></div>
+              <p class="comment-text">剑与山河22话打戏分镜很流畅，雪夜行军那段有电影感。</p>
+              <div class="comment-meta">昨天 19:12</div>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header"><span class="avatar">星</span><span class="comment-nick">星轨观察员</span></div>
+              <p class="comment-text">星轨之外植物设定挺硬核的，每话后面的小贴士对非科幻迷很友好。</p>
+              <div class="comment-meta">11 月 7 日</div>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header"><span class="avatar">猫</span><span class="comment-nick">夜班便利店</span></div>
+              <p class="comment-text">猫与便利店每话都短小治愈，适合睡前看一两话。</p>
+              <div class="comment-meta">11 月 6 日</div>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header"><span class="avatar">拳</span><span class="comment-nick">拳击新人</span></div>
+              <p class="comment-text">热血拳击社战术细节挺用心的，不是无脑燃，推荐。</p>
+              <div class="comment-meta">11 月 5 日</div>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header"><span class="avatar">雾</span><span class="comment-nick">雾海领航员</span></div>
+              <p class="comment-text">雾海旅人画风好美，但更新偏慢，养肥再看比较合适。</p>
+              <div class="comment-meta">11 月 4 日</div>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header"><span class="avatar">漫</span><span class="comment-nick">漫画杂食党</span></div>
+              <p class="comment-text">整体分类挺清楚的，但希望恋爱类能再细分一下校园和职场。</p>
+              <div class="comment-meta">11 月 3 日</div>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header"><span class="avatar">夜</span><span class="comment-nick">夜隐者分析</span></div>
+              <p class="comment-text">夜隐者的能力限制很清晰，不会出现战力崩坏，好评。</p>
+              <div class="comment-meta">11 月 2 日</div>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header"><span class="avatar">便</span><span class="comment-nick">便当二号</span></div>
+              <p class="comment-text">春日便当的料理画得很有食欲，看饿了。</p>
+              <div class="comment-meta">11 月 1 日</div>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header"><span class="avatar">档</span><span class="comment-nick">旧案重提</span></div>
+              <p class="comment-text">第七号档案完结了有点舍不得，希望能出续篇。</p>
+              <div class="comment-meta">10 月 31 日</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 板块9：相关资讯 -->
+        <section class="section" id="news">
+          <div class="section-header">
+            <h2>相关资讯</h2>
+          </div>
+          <div class="news-list">
+            <article class="news-item">
+              <img src="https://picsum.photos/seed/news-yeyin/600/400" alt="《夜隐者》第8话更新公告配图" width="600" height="400" loading="lazy">
+              <div class="news-content">
+                <h3>《夜隐者》第 8 话「影子的证词」11 月 8 日上线</h3>
+                <div class="date">2026-11-08</div>
+                <p>关键证人现身，主角能力限制首次被明确说明，社区讨论热度攀升。</p>
+              </div>
+            </article>
+            <article class="news-item">
+              <img src="https://picsum.photos/seed/news-biandang/600/400" alt="《春日便当》文化祭篇讨论配图" width="600" height="400" loading="lazy">
+              <div class="news-content">
+                <h3>《春日便当》文化祭告白篇登顶本周恋爱类热度榜</h3>
+                <div class="date">2026-11-07</div>
+                <p>第 15 话更新后，读者对料理社群像和告白场景的评价持续走高。</p>
+              </div>
+            </article>
+            <article class="news-item">
+              <img src="https://picsum.photos/seed/news-xingji/600/400" alt="《星轨之外》设定更新配图" width="600" height="400" loading="lazy">
+              <div class="news-content">
+                <h3>《星轨之外》追加植物生态设定小贴士</h3>
+                <div class="date">2026-11-06</div>
+                <p>作者在单行本中补充了飞船温室的技术细节，方便读者理解第 9 话关键情节。</p>
+              </div>
+            </article>
+            <article class="news-item">
+              <img src="https://picsum.photos/seed/news-dangan/600/400" alt="《第七号档案》番外篇发布配图" width="600" height="400" loading="lazy">
+              <div class="news-content">
+                <h3>《第七号档案》第 3 卷追加番外「档案室的午后」</h3>
+                <div class="date">2026-11-05</div>
+                <p>番外以配角视角展开，补充了主线未交代的档案科日常。</p>
+              </div>
+            </article>
+            <article class="news-item">
+              <img src="https://picsum.photos/seed/news-jianyu/600/400" alt="《剑与山河》武打分镜讨论配图" width="600" height="400" loading="lazy">
+              <div class="news-content">
+                <h3>《剑与山河》第 22 话武打分镜获读者好评</h3>
+                <div class="date">2026-11-04</div>
+                <p>雪夜行军场景的长镜头分镜被多位读者评价为近期古风漫画最佳打戏之一。</p>
+              </div>
+            </article>
+            <article class="news-item">
+              <img src="https://picsum.photos/seed/news-quanji/600/400" alt="《热血拳击社》角色人气投票配图" width="600" height="400" loading="lazy">
+              <div class="news-content">
+                <h3>《热血拳击社》角色人气投票结果公布</h3>
+                <div class="date">2026-11-03</div>
+                <p>主角与教练分列前两名，作者表示后续会加强教练的过去篇。</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- 板块10：相关推荐 -->
+        <section class="section" id="related">
+          <div class="section-header">
+            <h2>延伸方向与相关推荐</h2>
+          </div>
+          <div class="tag-index">
+            <a href="#featured">超能力侦探漫画</a>
+            <a href="#featured">校园料理恋爱</a>
+            <a href="#featured">刑侦档案推理</a>
+            <a href="#featured">古风武侠群像</a>
+            <a href="#featured">硬科幻太空生存</a>
+            <a href="#featured">治愈系单元日常</a>
+            <a href="#featured">拳击运动热血</a>
+            <a href="#featured">奇幻冒险旅行</a>
+          </div>
+        </section>
+
+        <!-- 板块11：热门榜单 -->
+        <section class="section" id="ranking">
+          <div class="section-header">
+            <h2>本周热门榜单</h2>
+          </div>
+          <div class="ranking-list">
+            <div class="ranking-item"><span class="rank-num">1</span><span class="rank-title">春日便当</span><span class="rank-score">9.5 分 · 恋爱</span></div>
+            <div class="ranking-item"><span class="rank-num">2</span><span class="rank-title">猫与便利店</span><span class="rank-score">9.4 分 · 治愈</span></div>
+            <div class="ranking-item"><span class="rank-num">3</span><span class="rank-title">夜隐者</span><span class="rank-score">9.2 分 · 悬疑</span></div>
+            <div class="ranking-item"><span class="rank-num">4</span><span class="rank-title">星轨之外</span><span class="rank-score">9.1 分 · 科幻</span></div>
+            <div class="ranking-item"><span class="rank-num">5</span><span class="rank-title">第七号档案</span><span class="rank-score">9.0 分 · 刑侦</span></div>
+            <div class="ranking-item"><span class="rank-num">6</span><span class="rank-title">热血拳击社</span><span class="rank-score">8.9 分 · 热血</span></div>
+          </div>
+        </section>
+      </div>
+
+      <!-- 右辅助栏 -->
+      <aside class="right-sidebar">
+        <div class="sidebar-widget update-stream">
+          <h2>更新流</h2>
+          <div class="update-item"><span class="update-title">夜隐者 第8话</span><span class="update-time">今天 09:30</span></div>
+          <div class="update-item"><span class="update-title">春日便当 第15话</span><span class="update-time">今天 08:15</span></div>
+          <div class="update-item"><span class="update-title">星轨之外 第9话</span><span class="update-time">昨天 21:10</span></div>
+          <div class="update-item"><span class="update-title">第七号档案 番外</span><span class="update-time">昨天 16:45</span></div>
+          <div class="update-item"><span class="update-title">剑与山河 第22话</span><span class="update-time">11月6日</span></div>
+        </div>
+        <div class="sidebar-widget">
+          <h2>热门标签</h2>
+          <div class="hot-tags">
+            <a href="#featured">超能力侦探</a>
+            <a href="#featured">校园恋爱</a>
+            <a href="#featured">刑侦档案</a>
+            <a href="#featured">古风武侠</a>
+            <a href="#featured">太空科幻</a>
+            <a href="#featured">治愈日常</a>
+            <a href="#featured">拳击运动</a>
+            <a href="#featured">奇幻冒险</a>
+          </div>
+        </div>
+        <div class="sidebar-widget">
+          <h2>分类速览</h2>
+          <ul style="display:flex;flex-direction:column;gap:6px;font-size:14px;">
+            <li><a href="#categories">热血 · 42部</a></li>
+            <li><a href="#categories">恋爱 · 68部</a></li>
+            <li><a href="#categories">悬疑 · 35部</a></li>
+            <li><a href="#categories">古风 · 51部</a></li>
+            <li><a href="#categories">科幻 · 27部</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">瓜子漫画免费入口</div>
+          <p class="footer-desc">全品类漫画在线浏览，聚焦热血、恋爱、悬疑、古风、科幻等题材的具体条目与更新动态。</p>
+        </div>
+        <div class="footer-col">
+          <h3>题材</h3>
+          <ul>
+            <li><a href="#categories">热血</a></li>
+            <li><a href="#categories">恋爱</a></li>
+            <li><a href="#categories">悬疑</a></li>
+            <li><a href="#categories">古风</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>发现</h3>
+          <ul>
+            <li><a href="#featured">精选推荐</a></li>
+            <li><a href="#latest">最新更新</a></li>
+            <li><a href="#ranking">热门榜单</a></li>
+            <li><a href="#comments">读者评论</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>帮助</h3>
+          <ul>
+            <li><a href="#faq">常见问题</a></li>
+            <li><a href="#guide">阅读指南</a></li>
+            <li><a href="#deep-dive">深度解析</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 瓜子漫画免费入口 · 内容聚合展示</span>
+        <span>部分内容为示例数据，仅用于展示页面结构</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 轻量搜索过滤：根据搜索框内容高亮/筛选卡片标题（仅演示，无结果时提示）
+    (function() {
+      const searchInput = document.querySelector('.search-input');
+      if (!searchInput) return;
+      const cards = document.querySelectorAll('#featured .card');
+      const featuredGrid = document.querySelector('#featured .card-grid');
+      let noResultEl = null;
+      searchInput.addEventListener('input', function() {
+        const q = this.value.trim().toLowerCase();
+        let visibleCount = 0;
+        cards.forEach(card => {
+          const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+          const desc = card.querySelector('.card-desc')?.textContent.toLowerCase() || '';
+          const match = !q || title.includes(q) || desc.includes(q);
+          card.style.display = match ? '' : 'none';
+          if (match) visibleCount++;
+        });
+        if (q && visibleCount === 0) {
+          if (!noResultEl) {
+            noResultEl = document.createElement('p');
+            noResultEl.style.cssText = 'text-align:center;color:#9a9a9a;padding:20px 0;';
+            noResultEl.textContent = '没有找到匹配的漫画，试试其他关键词。';
+            featuredGrid?.after(noResultEl);
+          }
+          noResultEl.style.display = 'block';
+        } else if (noResultEl) {
+          noResultEl.style.display = 'none';
+        }
+      });
+    })();
+  </script>
+</body>
+                </html>
