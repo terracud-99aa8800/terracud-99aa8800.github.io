@@ -1,0 +1,2236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>r星每日大赛寸止挑战 - 挑战玩法与每日赛事追踪</title>
+  <meta name="description" content="r星每日大赛寸止挑战聚合每日挑战赛程、通关录像、技巧解析与社区排行。适合关注极限操作、寸止判定与每日任务奖励的玩家深入浏览。">
+  <meta name="keywords" content="寸止挑战技巧,每日大赛赛程,极限操作录像,通关判定规则,挑战赛排行">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230d0f14'/%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='%23f5c518' stroke-width='6'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%23f5c518'/%3E%3C/svg%3E">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #0b0e14;
+      --bg-panel: #12171f;
+      --bg-card: #1a202a;
+      --bg-hover: #222b38;
+      --border: #2b3544;
+      --border-light: #3a4a5e;
+      --text: #e8edf5;
+      --text-secondary: #9aa9bb;
+      --text-muted: #6b7d94;
+      --accent: #f5c518;
+      --accent-dim: rgba(245, 197, 24, 0.15);
+      --accent-2: #e85d3a;
+      --accent-3: #3d8bfd;
+      --success: #2ecc71;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      --font: 'Inter', 'PingFang SC', 'Microsoft YaHei', system-ui, -apple-system, sans-serif;
+      --announce-h: 40px;
+      --header-h: 64px;
+      --sticky-offset: calc(var(--announce-h) + var(--header-h) + 12px);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: var(--sticky-offset);
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* 吸顶公告条 + 页头 */
+    .sticky-wrapper {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .announce-bar {
+      height: var(--announce-h);
+      background: linear-gradient(90deg, #1a1200, #2a1f00, #1a1200);
+      border-bottom: 1px solid rgba(245, 197, 24, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: var(--accent);
+      letter-spacing: 0.3px;
+      padding: 0 16px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .announce-bar strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .site-header {
+      height: var(--header-h);
+      background: rgba(11, 14, 20, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      gap: 24px;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .logo-svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .logo-text {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .logo-text span {
+      color: var(--accent);
+    }
+
+    .main-nav {
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      flex: 1;
+    }
+
+    .main-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .main-nav a {
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .main-nav a:hover,
+    .main-nav a:focus-visible {
+      color: var(--accent);
+      background: var(--accent-dim);
+      outline: none;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .btn {
+      padding: 7px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid var(--border-light);
+      background: transparent;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0b0e14;
+      border-color: var(--accent);
+    }
+
+    .btn-primary:hover {
+      background: #ffd83d;
+      color: #0b0e14;
+    }
+
+    /* 布局容器 */
+    .layout-container {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .three-col {
+      display: grid;
+      grid-template-columns: 180px 1fr 260px;
+      gap: 24px;
+      padding: 28px 0 40px;
+      align-items: start;
+    }
+
+    /* 左侧频道索引 */
+    .channel-sidebar {
+      position: sticky;
+      top: var(--sticky-offset);
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 0;
+      max-height: calc(100vh - var(--sticky-offset) - 40px);
+      overflow-y: auto;
+    }
+
+    .channel-sidebar h3 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      padding: 0 16px 12px;
+      font-weight: 600;
+    }
+
+    .channel-sidebar nav a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 16px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      transition: all 0.15s;
+      border-left: 3px solid transparent;
+    }
+
+    .channel-sidebar nav a:hover,
+    .channel-sidebar nav a:focus-visible {
+      background: var(--bg-hover);
+      color: var(--text);
+      outline: none;
+    }
+
+    .channel-sidebar nav a.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .channel-sidebar nav a .ch-icon {
+      font-size: 16px;
+      width: 20px;
+      text-align: center;
+    }
+
+    /* 主内容 */
+    .main-content {
+      min-width: 0;
+    }
+
+    /* 首屏 */
+    .hero {
+      background: linear-gradient(135deg, #12171f 0%, #1a202a 50%, #12171f 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -40px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(245, 197, 24, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      left: 40%;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(61, 139, 253, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(245, 197, 24, 0.3);
+      border-radius: 20px;
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 16px;
+      letter-spacing: 0.5px;
+    }
+
+    .hero h1 {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+      line-height: 1.3;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      color: var(--text-secondary);
+      max-width: 640px;
+      line-height: 1.8;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 28px;
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-stat-item .num {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .hero-stat-item .lbl {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* 通用板块 */
+    .section-block {
+      margin-bottom: 32px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      gap: 12px;
+    }
+
+    .section-header h2 {
+      font-size: 20px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-header h2::before {
+      content: '';
+      width: 4px;
+      height: 20px;
+      background: var(--accent);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .section-header .more-link {
+      font-size: 13px;
+      color: var(--text-muted);
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+
+    .section-header .more-link:hover {
+      color: var(--accent);
+    }
+
+    /* 卡片网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: all 0.25s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      border-color: var(--border-light);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .card-img-wrap {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: var(--bg-panel);
+    }
+
+    .card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .card:hover .card-img-wrap img {
+      transform: scale(1.04);
+    }
+
+    .card-type-tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(11, 14, 20, 0.85);
+      backdrop-filter: blur(4px);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(245, 197, 24, 0.25);
+    }
+
+    .card-body {
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .card-title a {
+      transition: color 0.2s;
+    }
+
+    .card-title a:hover {
+      color: var(--accent);
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 12px;
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .card-tags span {
+      font-size: 11px;
+      color: var(--text-muted);
+      background: var(--bg-hover);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-muted);
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .card-meta .hot {
+      color: var(--accent-2);
+      font-weight: 600;
+    }
+
+    .card-meta .score {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* 紧凑列表 */
+    .compact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .compact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+
+    .compact-item:last-child {
+      border-bottom: none;
+    }
+
+    .compact-item:hover {
+      background: var(--bg-hover);
+    }
+
+    .compact-item .idx {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: var(--bg-hover);
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .compact-item:nth-child(1) .idx { background: var(--accent); color: #0b0e14; }
+    .compact-item:nth-child(2) .idx { background: #c0c0c0; color: #0b0e14; }
+    .compact-item:nth-child(3) .idx { background: #cd7f32; color: #0b0e14; }
+
+    .compact-item .content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .compact-item .title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 3px;
+      transition: color 0.2s;
+    }
+
+    .compact-item:hover .title {
+      color: var(--accent);
+    }
+
+    .compact-item .sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .compact-item .badge {
+      font-size: 11px;
+      color: var(--accent);
+      background: var(--accent-dim);
+      padding: 1px 7px;
+      border-radius: 4px;
+    }
+
+    /* 分类入口 */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+    }
+
+    .category-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px 14px;
+      text-align: center;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .category-item:hover,
+    .category-item:focus-visible {
+      border-color: var(--accent);
+      background: var(--accent-dim);
+      outline: none;
+    }
+
+    .category-item .cat-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .category-item .cat-name {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .category-item .cat-count {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* 深度解析 */
+    .deep-article {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px 32px;
+    }
+
+    .deep-article h2 {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .deep-article h2::before {
+      content: '';
+      width: 4px;
+      height: 22px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .deep-article h3 {
+      font-size: 17px;
+      font-weight: 700;
+      margin: 24px 0 10px;
+      color: var(--accent);
+    }
+
+    .deep-article h3:first-of-type {
+      margin-top: 0;
+    }
+
+    .deep-article p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.85;
+      margin-bottom: 12px;
+    }
+
+    .deep-article ul {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 16px;
+    }
+
+    .deep-article ul li {
+      position: relative;
+      padding-left: 20px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 6px;
+    }
+
+    .deep-article ul li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* 体验指南 */
+    .guide-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .guide-step {
+      display: flex;
+      gap: 16px;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+
+    .guide-step:last-child {
+      border-bottom: none;
+    }
+
+    .guide-step:hover {
+      background: var(--bg-hover);
+    }
+
+    .guide-step .step-num {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--accent-dim);
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .guide-step .step-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .guide-step .step-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .guide-step .step-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* FAQ */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .faq-item summary {
+      padding: 14px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      transition: background 0.2s;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary::after {
+      content: '+';
+      font-size: 18px;
+      color: var(--accent);
+      font-weight: 400;
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+
+    .faq-item[open] summary::after {
+      content: '−';
+    }
+
+    .faq-item summary:hover {
+      background: var(--bg-hover);
+    }
+
+    .faq-item summary:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: -2px;
+    }
+
+    .faq-answer {
+      padding: 0 18px 16px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    /* 用户评论 */
+    .comment-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+    }
+
+    .comment-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      transition: border-color 0.2s;
+    }
+
+    .comment-card:hover {
+      border-color: var(--border-light);
+    }
+
+    .comment-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .comment-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-dim), var(--bg-hover));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .comment-user {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .comment-time {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+
+    .comment-text {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* 相关资讯 */
+    .news-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .news-item {
+      display: flex;
+      gap: 14px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+
+    .news-item:last-child {
+      border-bottom: none;
+    }
+
+    .news-item:hover {
+      background: var(--bg-hover);
+    }
+
+    .news-thumb {
+      width: 100px;
+      height: 70px;
+      flex-shrink: 0;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: var(--bg-panel);
+    }
+
+    .news-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .news-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .news-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      line-height: 1.4;
+      transition: color 0.2s;
+    }
+
+    .news-item:hover .news-title {
+      color: var(--accent);
+    }
+
+    .news-summary {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .news-date {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* 相关推荐 */
+    .related-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .related-tag {
+      display: inline-block;
+      padding: 8px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      color: var(--text-secondary);
+      transition: all 0.2s;
+    }
+
+    .related-tag:hover,
+    .related-tag:focus-visible {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-dim);
+      outline: none;
+    }
+
+    /* 右侧栏 */
+    .right-sidebar {
+      position: sticky;
+      top: var(--sticky-offset);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-height: calc(100vh - var(--sticky-offset) - 40px);
+      overflow-y: auto;
+    }
+
+    .sidebar-panel {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .sidebar-panel-header {
+      padding: 14px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sidebar-panel-header::before {
+      content: '';
+      width: 3px;
+      height: 14px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .sidebar-panel-body {
+      padding: 8px 0;
+    }
+
+    .rank-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 16px;
+      transition: background 0.2s;
+    }
+
+    .rank-item:hover {
+      background: var(--bg-hover);
+    }
+
+    .rank-num {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      background: var(--bg-hover);
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .rank-item:nth-child(1) .rank-num { background: var(--accent); color: #0b0e14; }
+    .rank-item:nth-child(2) .rank-num { background: #c0c0c0; color: #0b0e14; }
+    .rank-item:nth-child(3) .rank-num { background: #cd7f32; color: #0b0e14; }
+
+    .rank-name {
+      flex: 1;
+      font-size: 13px;
+      font-weight: 500;
+      transition: color 0.2s;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .rank-item:hover .rank-name {
+      color: var(--accent);
+    }
+
+    .rank-hot {
+      font-size: 11px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .update-stream {
+      padding: 4px 0;
+    }
+
+    .update-item {
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+
+    .update-item:last-child {
+      border-bottom: none;
+    }
+
+    .update-item:hover {
+      background: var(--bg-hover);
+    }
+
+    .update-item .u-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 2px;
+      transition: color 0.2s;
+    }
+
+    .update-item:hover .u-title {
+      color: var(--accent);
+    }
+
+    .update-item .u-time {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* 页尾 */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      background: var(--bg-panel);
+      margin-top: 20px;
+      padding: 40px 0 24px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+
+    .footer-brand .logo-text {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .footer-brand p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 320px;
+    }
+
+    .footer-col h4 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 13px;
+      color: var(--text-muted);
+      padding: 4px 0;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover {
+      color: var(--accent);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* 响应式 */
+    @media (max-width: 1024px) {
+      .three-col {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .channel-sidebar {
+        position: static;
+        max-height: none;
+        display: flex;
+        overflow-x: auto;
+        padding: 8px;
+        gap: 4px;
+        scrollbar-width: none;
+      }
+
+      .channel-sidebar::-webkit-scrollbar {
+        display: none;
+      }
+
+      .channel-sidebar h3 {
+        display: none;
+      }
+
+      .channel-sidebar nav {
+        display: flex;
+        gap: 4px;
+      }
+
+      .channel-sidebar nav a {
+        border-left: none;
+        border-bottom: 3px solid transparent;
+        padding: 8px 14px;
+        white-space: nowrap;
+      }
+
+      .channel-sidebar nav a.active {
+        border-left: none;
+        border-bottom-color: var(--accent);
+      }
+
+      .right-sidebar {
+        position: static;
+        max-height: none;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 16px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 740px) {
+      :root {
+        --announce-h: 36px;
+        --header-h: 56px;
+      }
+
+      .site-header {
+        padding: 0 16px;
+        gap: 12px;
+      }
+
+      .logo-text {
+        font-size: 15px;
+      }
+
+      .header-actions .btn:not(.btn-primary) {
+        display: none;
+      }
+
+      .layout-container {
+        padding: 0 14px;
+      }
+
+      .hero {
+        padding: 24px 18px;
+      }
+
+      .hero h1 {
+        font-size: 24px;
+      }
+
+      .hero-desc {
+        font-size: 14px;
+      }
+
+      .hero-stats {
+        gap: 18px;
+      }
+
+      .deep-article {
+        padding: 20px 16px;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .comment-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .news-thumb {
+        width: 80px;
+        height: 56px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .right-sidebar {
+        grid-template-columns: 1fr;
+      }
+
+      .main-nav {
+        gap: 0;
+      }
+
+      .main-nav a {
+        padding: 6px 8px;
+        font-size: 13px;
+      }
+    }
+
+    /* 焦点可见 */
+    a:focus-visible,
+    button:focus-visible,
+    summary:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* 滚动条美化 */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--border-light);
+    }
+  </style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+  <!-- 吸顶公告条 + 页头 -->
+  <div class="sticky-wrapper">
+    <div class="announce-bar">
+      🎯 本周新增 <strong>12 条寸止挑战档案</strong> · 11 月 8 日每日大赛已开赛 · 秋季极限操作赛季进行中
+    </div>
+    <header class="site-header">
+      <div class="logo-area">
+        <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="38" stroke="#f5c518" stroke-width="5"/>
+          <circle cx="50" cy="50" r="14" fill="#f5c518"/>
+          <path d="M50 8 L50 22" stroke="#f5c518" stroke-width="5" stroke-linecap="round"/>
+          <path d="M50 78 L50 92" stroke="#f5c518" stroke-width="5" stroke-linecap="round"/>
+          <path d="M8 50 L22 50" stroke="#f5c518" stroke-width="5" stroke-linecap="round"/>
+          <path d="M78 50 L92 50" stroke="#f5c518" stroke-width="5" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-text">r星每日大赛<span>寸止挑战</span></span>
+      </div>
+      <nav class="main-nav" aria-label="主导航">
+        <a href="/#daily-schedule">每日赛程</a>
+        <a href="/#featured">精选挑战</a>
+        <a href="/#category">分类入口</a>
+        <a href="/#deep-analysis">深度解析</a>
+        <a href="/#guide">体验指南</a>
+        <a href="/#faq">常见问题</a>
+        <a href="/#comments">玩家评论</a>
+      </nav>
+      <div class="header-actions">
+        <button class="btn" type="button">登录</button>
+        <button class="btn btn-primary" type="button">今日赛程</button>
+      </div>
+    </header>
+  </div>
+
+  <!-- 主布局：三栏门户 -->
+  <div class="layout-container">
+    <div class="three-col">
+
+      <!-- 左侧频道索引 -->
+      <aside class="channel-sidebar" aria-label="频道索引">
+        <h3>频道索引</h3>
+        <nav>
+          <a href="/#daily-schedule" class="active"><span class="ch-icon">📅</span>每日赛程</a>
+          <a href="/#featured"><span class="ch-icon">🔥</span>精选挑战</a>
+          <a href="/#latest-updates"><span class="ch-icon">⚡</span>最新动态</a>
+          <a href="/#category"><span class="ch-icon">🗂️</span>分类入口</a>
+          <a href="/#deep-analysis"><span class="ch-icon">📖</span>深度解析</a>
+          <a href="/#guide"><span class="ch-icon">🧭</span>体验指南</a>
+          <a href="/#faq"><span class="ch-icon">❓</span>常见问题</a>
+          <a href="/#comments"><span class="ch-icon">💬</span>玩家评论</a>
+          <a href="/#news"><span class="ch-icon">📰</span>相关资讯</a>
+          <a href="/#related"><span class="ch-icon">🔗</span>相关推荐</a>
+        </nav>
+      </aside>
+
+      <!-- 主内容 -->
+      <main class="main-content">
+
+        <!-- 首屏 -->
+        <section class="hero" id="hero">
+          <span class="hero-badge">每日大赛 · 寸止挑战专页</span>
+          <h1>r星每日大赛寸止挑战</h1>
+          <p class="hero-desc">
+            聚合每日寸止挑战赛程、通关录像、判定规则与社区排行。涵盖极限操作、时间竞速、精准停帧等细分玩法，
+            适合追踪每日任务奖励、研究判定机制与对比不同挑战类型的玩家。
+          </p>
+          <div class="hero-actions">
+            <a href="/#daily-schedule" class="btn btn-primary">查看今日赛程</a>
+            <a href="/#featured" class="btn">浏览精选挑战</a>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat-item">
+              <div class="num">128</div>
+              <div class="lbl">本周挑战档案</div>
+            </div>
+            <div class="hero-stat-item">
+              <div class="num">4,762</div>
+              <div class="lbl">今日参与人次</div>
+            </div>
+            <div class="hero-stat-item">
+              <div class="num">11.08</div>
+              <div class="lbl">当前赛季版本</div>
+            </div>
+            <div class="hero-stat-item">
+              <div class="num">36</div>
+              <div class="lbl">今日新上传录像</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 板块1：主题领域概览 -->
+        <section class="section-block" id="overview">
+          <div class="section-header">
+            <h2>寸止挑战领域概览</h2>
+          </div>
+          <div style="background:var(--bg-panel);border:1px solid var(--border);border-radius:var(--radius-md);padding:20px 24px;">
+            <p style="font-size:14px;color:var(--text-secondary);line-height:1.85;margin-bottom:12px;">
+              r星每日大赛寸止挑战是围绕“精准停帧”与“极限操作”形成的挑战内容生态。其核心在于玩家需要在特定规则下完成一系列操作，
+              在系统判定的时间窗口内“寸止”——即精确停止或保持在某个状态。每日大赛会轮换不同地图、载具与任务目标，
+              常见方向包括：竞速类寸止（在终点线前精确刹车）、射击类寸止（在换弹间隙完成击杀）、载具类寸止（以最低速度通过检查点）、
+              以及综合类挑战（多目标连续寸止）。
+            </p>
+            <p style="font-size:14px;color:var(--text-secondary);line-height:1.85;margin-bottom:12px;">
+              当前赛季（11.08 版本）新增了“雨夜追缉”与“沙漠环线”两张挑战地图，判定窗口从 0.3 秒收紧至 0.25 秒，
+              同时引入了连击倍率机制——连续三次精准寸止可触发双倍积分。每日大赛的排行榜按完成时间与精准度加权计算，
+              社区中流行的对比维度包括：单次判定误差、路线选择、载具改装方案与手柄/键鼠的操作差异。
+            </p>
+            <p style="font-size:14px;color:var(--text-secondary);line-height:1.85;">
+              对于刚接触的玩家，建议先理解“判定窗口”与“容错区间”这两个核心概念，再从竞速类寸止入手建立节奏感。
+              进阶玩家则更关注录像复盘中的帧级分析、不同载具的制动曲线，以及每日轮换规则下的最优路线规划。
+            </p>
+          </div>
+        </section>
+
+        <!-- 板块2：精选内容推荐 -->
+        <section class="section-block" id="featured">
+          <div class="section-header">
+            <h2>精选寸止挑战推荐</h2>
+            <a href="/#daily-schedule" class="more-link">查看全部 →</a>
+          </div>
+          <div class="card-grid">
+            <article class="card">
+              <div class="card-img-wrap">
+                <img src="https://picsum.photos/seed/cunzhi-rain01/400/300" alt="雨夜追缉寸止挑战封面" width="400" height="300" loading="lazy">
+                <span class="card-type-tag">竞速寸止</span>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title"><a href="/#featured">雨夜追缉·终点线精准停帧</a></h3>
+                <p class="card-desc">雨夜地图湿滑路面，终点线前 50 米开始制动。判定窗口 0.25 秒，推荐使用改装刹车配重方案，社区最佳误差 0.03 秒。</p>
+                <div class="card-tags">
+                  <span>湿滑路面</span><span>制动曲线</span><span>0.25秒窗口</span>
+                </div>
+                <div class="card-meta">
+                  <span class="hot">🔥 热度 9,842</span>
+                  <span class="score">★ 4.9</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card-img-wrap">
+                <img src="https://picsum.photos/seed/cunzhi-desert02/400/300" alt="沙漠环线载具寸止地图" width="400" height="300" loading="lazy">
+                <span class="card-type-tag">载具寸止</span>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title"><a href="/#featured">沙漠环线·低速过点挑战</a></h3>
+                <p class="card-desc">以低于 15km/h 的速度连续通过三个检查点，沙地摩擦力波动大，需要油门与手刹的微操配合。本周新增双倍积分时段。</p>
+                <div class="card-tags">
+                  <span>低速控制</span><span>手刹微操</span><span>双倍积分</span>
+                </div>
+                <div class="card-meta">
+                  <span class="hot">🔥 热度 8,120</span>
+                  <span class="score">★ 4.7</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card-img-wrap">
+                <img src="https://picsum.photos/seed/cunzhi-shoot03/400/300" alt="换弹间隙击杀挑战场景" width="400" height="300" loading="lazy">
+                <span class="card-type-tag">射击寸止</span>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title"><a href="/#featured">换弹间隙·三连精准击杀</a></h3>
+                <p class="card-desc">在换弹动作的固定帧窗口内完成三次击杀，每次间隔不超过 1.2 秒。推荐使用突击步枪配扩容弹匣，容错帧仅 6 帧。</p>
+                <div class="card-tags">
+                  <span>帧窗口</span><span>三连击</span><span>扩容弹匣</span>
+                </div>
+                <div class="card-meta">
+                  <span class="hot">🔥 热度 7,650</span>
+                  <span class="score">★ 4.8</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card-img-wrap">
+                <img src="https://picsum.photos/seed/cunzhi-combo04/400/300" alt="连续寸止连击倍率挑战" width="400" height="300" loading="lazy">
+                <span class="card-type-tag">综合挑战</span>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title"><a href="/#featured">连续寸止·连击倍率冲刺</a></h3>
+                <p class="card-desc">三种不同操作各完成一次精准寸止触发连击，第三次判定成功后积分翻倍。路线顺序影响节奏，社区开发出“刹车-射击-停帧”三段流。</p>
+                <div class="card-tags">
+                  <span>连击倍率</span><span>三段流</span><span>积分翻倍</span>
+                </div>
+                <div class="card-meta">
+                  <span class="hot">🔥 热度 6,980</span>
+                  <span class="score">★ 4.6</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card-img-wrap">
+                <img src="https://picsum.photos/seed/cunzhi-night05/400/300" alt="午夜高架桥竞速寸止" width="400" height="300" loading="lazy">
+                <span class="card-type-tag">竞速寸止</span>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title"><a href="/#featured">午夜高架·最低速通过</a></h3>
+                <p class="card-desc">在高架桥限速路段以 8km/h 以下通过测速点，夜间视野受限，需要提前预判弯道。当前赛季排行榜门槛为误差 0.05 秒内。</p>
+                <div class="card-tags">
+                  <span>夜间赛道</span><span>限速点</span><span>预判弯道</span>
+                </div>
+                <div class="card-meta">
+                  <span class="hot">🔥 热度 6,440</span>
+                  <span class="score">★ 4.5</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card-img-wrap">
+                <img src="https://picsum.photos/seed/cunzhi-heli06/400/300" alt="直升机悬停寸止挑战" width="400" height="300" loading="lazy">
+                <span class="card-type-tag">载具寸止</span>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title"><a href="/#featured">直升机悬停·定点寸止</a></h3>
+                <p class="card-desc">在指定坐标上空保持悬停 5 秒，高度波动不超过 2 米。螺旋桨下洗气流影响判断，手柄玩家反馈摇杆死区调校是关键。</p>
+                <div class="card-tags">
+                  <span>悬停判定</span><span>摇杆死区</span><span>高度波动</span>
+                </div>
+                <div class="card-meta">
+                  <span class="hot">🔥 热度 5,870</span>
+                  <span class="score">★ 4.4</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- 板块3：最新更新 / 热播动态 -->
+        <section class="section-block" id="latest-updates">
+          <div class="section-header">
+            <h2>今日大赛动态</h2>
+            <span style="font-size:12px;color:var(--text-muted);">2026-11-08 更新</span>
+          </div>
+          <div class="compact-list">
+            <div class="compact-item">
+              <div class="idx">1</div>
+              <div class="content">
+                <div class="title">雨夜追缉·终点线精准停帧 —— 今日 09:00 开放</div>
+                <div class="sub"><span>竞速寸止</span><span class="badge">新赛程</span><span>09:00 开放</span></div>
+              </div>
+            </div>
+            <div class="compact-item">
+              <div class="idx">2</div>
+              <div class="content">
+                <div class="title">沙漠环线·低速过点挑战 —— 双倍积分时段 14:00-16:00</div>
+                <div class="sub"><span>载具寸止</span><span class="badge">双倍积分</span><span>14:00 开始</span></div>
+              </div>
+            </div>
+            <div class="compact-item">
+              <div class="idx">3</div>
+              <div class="content">
+                <div class="title">换弹间隙·三连精准击杀 —— 昨日最佳录像已上传</div>
+                <div class="sub"><span>射击寸止</span><span class="badge">录像更新</span><span>昨天 21:10</span></div>
+              </div>
+            </div>
+            <div class="compact-item">
+              <div class="idx">4</div>
+              <div class="content">
+                <div class="title">连续寸止·连击倍率冲刺 —— 排行榜前十门槛提升至 0.04 秒</div>
+                <div class="sub"><span>综合挑战</span><span class="badge">规则调整</span><span>今天 08:30</span></div>
+              </div>
+            </div>
+            <div class="compact-item">
+              <div class="idx">5</div>
+              <div class="content">
+                <div class="title">午夜高架·最低速通过 —— 新增夜间雨天变体</div>
+                <div class="sub"><span>竞速寸止</span><span class="badge">地图变体</span><span>11 月 7 日</span></div>
+              </div>
+            </div>
+            <div class="compact-item">
+              <div class="idx">6</div>
+              <div class="content">
+                <div class="title">直升机悬停·定点寸止 —— 社区发现摇杆死区调校方案</div>
+                <div class="sub"><span>载具寸止</span><span class="badge">攻略分享</span><span>11 月 6 日</span></div>
+              </div>
+            </div>
+            <div class="compact-item">
+              <div class="idx">7</div>
+              <div class="content">
+                <div class="title">本周新增“雨夜追缉”与“沙漠环线”两张挑战地图</div>
+                <div class="sub"><span>赛程更新</span><span class="badge">本周新增</span><span>11 月 5 日</span></div>
+              </div>
+            </div>
+            <div class="compact-item">
+              <div class="idx">8</div>
+              <div class="content">
+                <div class="title">11 月赛季规则：判定窗口统一收紧至 0.25 秒</div>
+                <div class="sub"><span>规则调整</span><span class="badge">赛季更新</span><span>11 月 1 日</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 板块4：分类入口 -->
+        <section class="section-block" id="category">
+          <div class="section-header">
+            <h2>寸止挑战分类入口</h2>
+          </div>
+          <div class="category-grid">
+            <a class="category-item" href="/#featured">
+              <div class="cat-icon">🏁</div>
+              <div class="cat-name">竞速寸止</div>
+              <div class="cat-count">32 个挑战</div>
+            </a>
+            <a class="category-item" href="/#featured">
+              <div class="cat-icon">🚗</div>
+              <div class="cat-name">载具寸止</div>
+              <div class="cat-count">28 个挑战</div>
+            </a>
+            <a class="category-item" href="/#featured">
+              <div class="cat-icon">🎯</div>
+              <div class="cat-name">射击寸止</div>
+              <div class="cat-count">24 个挑战</div>
+            </a>
+            <a class="category-item" href="/#featured">
+              <div class="cat-icon">🔗</div>
+              <div class="cat-name">连击挑战</div>
+              <div class="cat-count">18 个挑战</div>
+            </a>
+            <a class="category-item" href="/#featured">
+              <div class="cat-icon">🌙</div>
+              <div class="cat-name">夜间赛道</div>
+              <div class="cat-count">16 个挑战</div>
+            </a>
+            <a class="category-item" href="/#featured">
+              <div class="cat-icon">🌧️</div>
+              <div class="cat-name">湿滑路面</div>
+              <div class="cat-count">12 个挑战</div>
+            </a>
+            <a class="category-item" href="/#featured">
+              <div class="cat-icon">🚁</div>
+              <div class="cat-name">飞行载具</div>
+              <div class="cat-count">10 个挑战</div>
+            </a>
+            <a class="category-item" href="/#featured">
+              <div class="cat-icon">🏆</div>
+              <div class="cat-name">每日排行</div>
+              <div class="cat-count">实时更新</div>
+            </a>
+          </div>
+        </section>
+
+        <!-- 板块5：深度解析正文 -->
+        <section class="section-block" id="deep-analysis">
+          <div class="deep-article">
+            <h2>寸止挑战深度解析</h2>
+
+            <h3>判定窗口与容错区间的区别</h3>
+            <p>
+              在每日大赛的寸止挑战中，“判定窗口”指系统认可操作有效的精确时间范围，通常以帧或毫秒计。当前赛季（11.08 版本）多数挑战的判定窗口为 0.25 秒，即 15 帧（按 60fps 计算）。而“容错区间”是玩家可接受的误差范围，两者并非同一概念——判定窗口是系统给定的硬性标准，容错区间则是玩家根据自身操作水平设定的心理目标。理解这一点，有助于在练习时区分“系统不认可”和“自己不满意”两种反馈。
+            </p>
+            <p>
+              以雨夜追缉的终点线停帧为例：判定窗口为终点线前 0.25 秒内完全停止，但社区高手通常会把自己的容错区间压缩到 0.05 秒以内。这种自我加压并不改变系统判定，却能在排行榜上形成明显差距。新手常犯的错误是将两者混为一谈，导致在窗口边缘反复试探却无法稳定。
+            </p>
+
+            <h3>竞速寸止与载具寸止的差异</h3>
+            <p>
+              虽然两者都涉及载具，但操作逻辑与评判维度差异明显。竞速寸止的核心是“从高速到零的精确控制”，考验刹车点选择、路面摩擦力判断与载具配重调校；载具寸止则更注重“低速状态下的稳定维持”，例如沙漠环线的低速过点挑战，要求玩家在 15km/h 以下连续通过检查点，油门与手刹的微操占比更高。
+            </p>
+            <ul>
+              <li><strong>竞速寸止：</strong>重点在制动曲线与终点线距离判断，推荐使用刹车配重偏前的改装方案，误差主要来自反应时间。</li>
+              <li><strong>载具寸止：</strong>重点在油门开度与手刹力度的配合，沙地、湿滑路面会引入额外变量，误差主要来自操作抖动。</li>
+              <li><strong>共同难点：</strong>两者都受载具改装影响，但竞速寸止对轮胎抓地力更敏感，载具寸止对悬挂软硬更敏感。</li>
+            </ul>
+
+            <h3>连击倍率机制下的路线选择</h3>
+            <p>
+              连续寸止挑战引入了连击倍率：连续三次精准寸止可触发双倍积分。这意味着玩家需要在不同操作类型之间切换，同时保持节奏不中断。社区中流行的“刹车-射击-停帧”三段流，正是利用三种操作的不同手感形成节奏记忆。路线选择的关键在于：第三段操作应放在判定窗口最宽松的位置，以降低连击中断风险。
+            </p>
+            <p>
+              以本周的连续寸止挑战为例，推荐顺序为：先完成射击寸止（换弹间隙击杀），再利用击杀后的短暂减速窗口衔接载具寸止（低速通过），最后以竞速寸止收尾。这种顺序利用了射击后的操作余裕，避免在高速状态下直接进入精密停帧。排行榜数据显示，采用该顺序的玩家连击成功率比随机顺序高出约 40%。
+            </p>
+
+            <h3>手柄与键鼠的操作差异</h3>
+            <p>
+              社区讨论中，手柄与键鼠的差异集中在微操精度与反馈方式上。手柄的摇杆提供连续输入，适合载具寸止中的油门微调与悬停高度控制；键鼠的按键为离散输入，在竞速寸止的刹车时机上更容易做到帧级精确。射击寸止则两者各有优势——手柄的辅助瞄准可降低跟枪难度，键鼠的快速转身在换弹间隙击杀多目标时更灵活。
+            </p>
+            <p>
+              当前排行榜前十中，手柄玩家占比约六成，主要集中在载具寸止与飞行载具类挑战；键鼠玩家则在射击寸止与竞速寸止中表现更突出。选择操作方式时，建议根据自己主攻的挑战类型决定，而非盲目跟随榜单。
+            </p>
+          </div>
+        </section>
+
+        <!-- 板块6：体验指南 -->
+        <section class="section-block" id="guide">
+          <div class="section-header">
+            <h2>寸止挑战体验指南</h2>
+          </div>
+          <div class="guide-steps">
+            <div class="guide-step">
+              <div class="step-num">1</div>
+              <div class="step-content">
+                <div class="step-title">从竞速寸止建立节奏感</div>
+                <div class="step-desc">竞速寸止的反馈最直接——刹车是否及时、停位是否精准，一眼可辨。建议先在雨夜追缉或午夜高架地图反复练习，熟悉 0.25 秒判定窗口的手感，再尝试其他类型。</div>
+              </div>
+            </div>
+            <div class="guide-step">
+              <div class="step-num">2</div>
+              <div class="step-content">
+                <div class="step-title">用录像复盘判断投入价值</div>
+                <div class="step-desc">查看高手录像时，重点关注三个节点：刹车起点、判定触发瞬间、最终误差值。若某条录像的误差长期稳定在 0.05 秒内，说明其路线与配装值得参考；若误差波动大，则更适合作为反面教材。</div>
+              </div>
+            </div>
+            <div class="guide-step">
+              <div class="step-num">3</div>
+              <div class="step-content">
+                <div class="step-title">对比同类挑战的难度门槛</div>
+                <div class="step-desc">以排行榜前 100 名的平均误差作为难度参考：竞速寸止通常为 0.08 秒，载具寸止为 0.12 秒，射击寸止为 0.06 秒。若某挑战的门槛显著低于同类，说明其判定窗口更宽松，适合作为过渡练习。</div>
+              </div>
+            </div>
+            <div class="guide-step">
+              <div class="step-num">4</div>
+              <div class="step-content">
+                <div class="step-title">根据每日轮换安排练习重点</div>
+                <div class="step-desc">每日大赛的轮换表提前一天公布，建议在当天挑战开放前，先用旧地图热身 15 分钟。双倍积分时段（通常为 14:00-16:00）优先冲击高难度挑战，以最大化收益。</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 板块7：FAQ -->
+        <section class="section-block" id="faq">
+          <div class="section-header">
+            <h2>寸止挑战常见问题</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>寸止挑战的判定窗口一般多久更新一次？</summary>
+              <div class="faq-answer">判定窗口随赛季版本调整，通常每个大赛季（约 6-8 周）更新一次。当前 11.08 赛季的判定窗口统一为 0.25 秒，上一次调整是在 9 月中旬，将窗口从 0.3 秒收紧。每日大赛不会单独修改判定窗口，但不同地图可能因路面条件产生实际手感差异。</div>
+            </details>
+            <details class="faq-item">
+              <summary>竞速寸止和载具寸止有什么区别？</summary>
+              <div class="faq-answer">竞速寸止侧重从高速到零的精确制动，考验刹车点选择与载具配重；载具寸止侧重低速状态下的稳定维持，如以 15km/h 以下连续通过检查点，考验油门与手刹的微操。两者的改装方向也不同：竞速寸止优先轮胎抓地力，载具寸止优先悬挂调校。</div>
+            </details>
+            <details class="faq-item">
+              <summary>第一次接触寸止挑战，从哪个条目开始看比较好？</summary>
+              <div class="faq-answer">建议从“雨夜追缉·终点线精准停帧”入手。该挑战的反馈直观，判定窗口为标准的 0.25 秒，社区录像丰富，适合建立基础节奏感。熟悉后再尝试“沙漠环线·低速过点挑战”，逐步过渡到射击寸止等对帧精度要求更高的类型。</div>
+            </details>
+            <details class="faq-item">
+              <summary>连击倍率挑战的评判标准通常是什么？</summary>
+              <div class="faq-answer">连击倍率挑战的评判标准包含两个维度：一是三次精准寸止的连续完成度，二是总完成时间。连续三次成功触发连击后，积分按双倍计算；若中途失败，则连击重置。排行榜按积分降序排列，同积分时以完成时间短者优先。</div>
+            </details>
+            <details class="faq-item">
+              <summary>手柄和键鼠在寸止挑战中差距大吗？</summary>
+              <div class="faq-answer">差距主要体现在操作类型上。手柄的连续输入在载具寸止和悬停挑战中更有优势，键鼠的帧级精确在竞速寸止和射击寸止中更突出。当前排行榜前十中手柄玩家约占六成，但具体到射击寸止分类，键鼠玩家占比更高。选择时应根据主攻方向决定。</div>
+            </details>
+            <details class="faq-item">
+              <summary>每日大赛的积分和奖励是怎么计算的？</summary>
+              <div class="faq-answer">积分由完成时间与精准度加权得出：精准度权重占 70%，完成时间占 30%。精准度越高、用时越短，积分越高。双倍积分时段内，所有挑战的积分按两倍计算，但连击倍率不与双倍时段叠加，取两者中的较高倍率。</div>
+            </details>
+          </div>
+        </section>
+
+        <!-- 板块8：用户评论 -->
+        <section class="section-block" id="comments">
+          <div class="section-header">
+            <h2>玩家评论</h2>
+          </div>
+          <div class="comment-grid">
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar">夜</div>
+                <div class="comment-user">夜行刹车手</div>
+                <div class="comment-time">今天 10:22</div>
+              </div>
+              <p class="comment-text">雨夜追缉的湿滑路面太考验刹车点了，我练了三天才把误差稳定在 0.06 秒内。改装方案用的是社区推荐的刹车配重前移，确实有用。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar">沙</div>
+                <div class="comment-user">沙漠低速控</div>
+                <div class="comment-time">今天 09:45</div>
+              </div>
+              <p class="comment-text">沙漠环线的低速过点挑战，手刹力度是关键。我用手柄摇杆做微调，比键鼠舒服很多。双倍积分时段冲了一波，积分涨得挺快。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar">帧</div>
+                <div class="comment-user">帧数猎手</div>
+                <div class="comment-time">昨天 22:10</div>
+              </div>
+              <p class="comment-text">换弹间隙三连击杀的容错帧真的只有 6 帧，键鼠打起来跟枪压力不小。看了排行榜第一的录像，他的预瞄点提前量卡得很准，值得学。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar">连</div>
+                <div class="comment-user">连击三段流</div>
+                <div class="comment-time">昨天 20:30</div>
+              </div>
+              <p class="comment-text">连击倍率挑战的三段流顺序确实有讲究，我按刹车-射击-停帧打，成功率比之前乱序高了差不多一倍。第三次停帧放在判定窗口最宽的位置很关键。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar">夜</div>
+                <div class="comment-user">午夜高架常客</div>
+                <div class="comment-time">11 月 7 日 18:20</div>
+              </div>
+              <p class="comment-text">午夜高架新增的雨天变体比想象中难，视野差加上路面滑，8km/h 以下通过测速点的要求有点苛刻。不过练熟了之后对判断力提升很大。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar">悬</div>
+                <div class="comment-user">悬停不晃</div>
+                <div class="comment-time">11 月 7 日 14:05</div>
+              </div>
+              <p class="comment-text">直升机悬停挑战的摇杆死区调校方案是我在社区看到的，照着调了之后高度波动从 3 米降到了 1.5 米。手柄玩家可以试试，键鼠可能不太适用。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar">新</div>
+                <div class="comment-user">新手寸止</div>
+                <div class="comment-time">11 月 6 日 21:40</div>
+              </div>
+              <p class="comment-text">刚入坑一周，竞速寸止确实适合入门。不过我觉得判定窗口收紧到 0.25 秒之后，练习曲线变陡了。有没有大佬推荐适合过渡的地图？</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar">数</div>
+                <div class="comment-user">数据流玩家</div>
+                <div class="comment-time">11 月 6 日 16:15</div>
+              </div>
+              <p class="comment-text">看了下排行榜数据，竞速寸止前 100 名的平均误差 0.08 秒，载具寸止 0.12 秒。这个差距和判定窗口的松紧基本吻合，说明社区整体水平在提升。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar">刹</div>
+                <div class="comment-user">刹车点玄学</div>
+                <div class="comment-time">11 月 5 日 19:30</div>
+              </div>
+              <p class="comment-text">雨夜追缉的终点线前 50 米开始制动，我试了十几次才找到感觉。关键是要提前预判路面湿滑带来的额外滑行距离，不能按干燥路面的经验来。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar">慢</div>
+                <div class="comment-user">慢就是快</div>
+                <div class="comment-time">11 月 5 日 11:20</div>
+              </div>
+              <p class="comment-text">载具寸止的低速控制比想象中有意思，油门和手刹的配合像在做微积分。沙漠环线我练了五天才勉强进排行榜前 50，但过程挺享受的。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar">换</div>
+                <div class="comment-user">换弹不空枪</div>
+                <div class="comment-time">11 月 4 日 22:50</div>
+              </div>
+              <p class="comment-text">射击寸止用突击步枪配扩容弹匣，三连击杀的节奏比较顺。但换弹间隙的窗口确实短，我建议先用训练模式把换弹动作的帧数摸清楚再上场。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar">双</div>
+                <div class="comment-user">双倍积分党</div>
+                <div class="comment-time">11 月 4 日 15:10</div>
+              </div>
+              <p class="comment-text">双倍积分时段冲分效率确实高，但建议先打自己最熟的挑战，别为了积分去碰不擅长的类型。我昨天在射击寸止上翻了两次车，积分反而掉了。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar">录</div>
+                <div class="comment-user">录像分析师</div>
+                <div class="comment-time">11 月 3 日 20:00</div>
+              </div>
+              <p class="comment-text">复盘录像时建议逐帧看刹车起点和判定触发点，很多高手的误差控制就藏在起点的选择上。我对比了自己和排行榜第一的录像，起点差了大概 3 帧。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar">季</div>
+                <div class="comment-user">赛季规则解读</div>
+                <div class="comment-time">11 月 2 日 09:30</div>
+              </div>
+              <p class="comment-text">11 月赛季把判定窗口收紧到 0.25 秒，整体难度提升了一档。不过连击倍率的加入让策略性更强了，不是单纯拼手速，路线选择变得更重要。</p>
+            </div>
+            <div class="comment-card">
+              <div class="comment-header">
+                <div class="comment-avatar">平</div>
+                <div class="comment-user">平衡性观察</div>
+                <div class="comment-time">11 月 1 日 17:40</div>
+              </div>
+              <p class="comment-text">手柄和键鼠的差异在载具寸止上被放大了，悬停挑战几乎清一色手柄玩家。不过射击寸止的榜单还是键鼠多，感觉整体平衡性还行，没有一边倒。</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 板块9：相关资讯 -->
+        <section class="section-block" id="news">
+          <div class="section-header">
+            <h2>寸止挑战相关资讯</h2>
+          </div>
+          <div class="news-list">
+            <article class="news-item">
+              <div class="news-thumb">
+                <img src="https://picsum.photos/seed/cunzhi-news01/600/400" alt="11月赛季规则更新公告配图" width="600" height="400" loading="lazy">
+              </div>
+              <div class="news-body">
+                <h3 class="news-title">11 月赛季规则调整：判定窗口统一收紧至 0.25 秒</h3>
+                <p class="news-summary">本次赛季更新将全部挑战类型的判定窗口从 0.3 秒收紧至 0.25 秒，同时引入连击倍率机制。竞速寸止受影响最大，社区正在重新校准刹车点参考数据。</p>
+                <div class="news-date">2026-11-01</div>
+              </div>
+            </article>
+            <article class="news-item">
+              <div class="news-thumb">
+                <img src="https://picsum.photos/seed/cunzhi-news02/600/400" alt="雨夜追缉新地图场景截图" width="600" height="400" loading="lazy">
+              </div>
+              <div class="news-body">
+                <h3 class="news-title">“雨夜追缉”新地图上线，湿滑路面成竞速寸止新课题</h3>
+                <p class="news-summary">新地图引入动态摩擦力系统，雨天路面比干燥路面多出约 15% 的滑行距离。首批通关玩家反馈，刹车点需要比常规地图提前 8-10 米。</p>
+                <div class="news-date">2026-11-05</div>
+              </div>
+            </article>
+            <article class="news-item">
+              <div class="news-thumb">
+                <img src="https://picsum.photos/seed/cunzhi-news03/600/400" alt="沙漠环线双倍积分活动宣传图" width="600" height="400" loading="lazy">
+              </div>
+              <div class="news-body">
+                <h3 class="news-title">沙漠环线双倍积分时段确定：11 月 8 日 14:00-16:00</h3>
+                <p class="news-summary">官方公布本周双倍积分安排，沙漠环线低速过点挑战入选。该时段内积分按两倍计算，但连击倍率不与双倍叠加，玩家需提前规划冲分策略。</p>
+                <div class="news-date">2026-11-07</div>
+              </div>
+            </article>
+            <article class="news-item">
+              <div class="news-thumb">
+                <img src="https://picsum.photos/seed/cunzhi-news04/600/400" alt="社区摇杆死区调校讨论帖配图" width="600" height="400" loading="lazy">
+              </div>
+              <div class="news-body">
+                <h3 class="news-title">社区热议：直升机悬停挑战的摇杆死区调校方案</h3>
+                <p class="news-summary">有玩家发现将摇杆死区调至 5% 可显著降低悬停时的高度波动，该方案在飞行载具类挑战中引发广泛讨论。但也有键鼠玩家指出该方法不具通用性。</p>
+                <div class="news-date">2026-11-06</div>
+              </div>
+            </article>
+            <article class="news-item">
+              <div class="news-thumb">
+                <img src="https://picsum.photos/seed/cunzhi-news05/600/400" alt="午夜高架夜间赛道扩展内容" width="600" height="400" loading="lazy">
+              </div>
+              <div class="news-body">
+                <h3 class="news-title">午夜高架新增雨天变体，夜间赛道难度再升级</h3>
+                <p class="news-summary">该变体在原有夜间赛道基础上叠加雨天效果，视野范围缩小约 40%。限速点通过速度要求从 10km/h 降至 8km/h，当前排行榜前十门槛为误差 0.05 秒。</p>
+                <div class="news-date">2026-11-07</div>
+              </div>
+            </article>
+            <article class="news-item">
+              <div class="news-thumb">
+                <img src="https://picsum.photos/seed/cunzhi-news06/600/400" alt="连续寸止连击倍率排行榜数据图" width="600" height="400" loading="lazy">
+              </div>
+              <div class="news-body">
+                <h3 class="news-title">连续寸止排行榜前十门槛提升至 0.04 秒误差</h3>
+                <p class="news-summary">本周连续寸止挑战的竞争明显加剧，前十名平均误差从上周的 0.06 秒降至 0.04 秒。三段流顺序的普及被认为是门槛提升的主要原因。</p>
+                <div class="news-date">2026-11-08</div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- 板块10：相关推荐 -->
+        <section class="section-block" id="related">
+          <div class="section-header">
+            <h2>寸止挑战延伸方向</h2>
+          </div>
+          <div class="related-tags">
+            <a href="/#featured" class="related-tag">雨夜追缉刹车点合集</a>
+            <a href="/#featured" class="related-tag">沙漠环线手刹微操</a>
+            <a href="/#featured" class="related-tag">换弹帧窗口训练法</a>
+            <a href="/#featured" class="related-tag">连击倍率路线规划</a>
+            <a href="/#featured" class="related-tag">悬停死区调校参数</a>
+            <a href="/#featured" class="related-tag">午夜高架雨天变体</a>
+            <a href="/#deep-analysis" class="related-tag">判定窗口与容错区间</a>
+            <a href="/#deep-analysis" class="related-tag">手柄键鼠操作对比</a>
+          </div>
+        </section>
+
+        <!-- 板块11：补充板块 - 条目时间线 -->
+        <section class="section-block" id="timeline">
+          <div class="section-header">
+            <h2>寸止挑战条目时间线</h2>
+          </div>
+          <div class="compact-list">
+            <div class="compact-item">
+              <div class="idx">11/01</div>
+              <div class="content">
+                <div class="title">11 月赛季规则上线，判定窗口收紧至 0.25 秒</div>
+                <div class="sub"><span>赛季更新</span><span>规则调整</span></div>
+              </div>
+            </div>
+            <div class="compact-item">
+              <div class="idx">11/03</div>
+              <div class="content">
+                <div class="title">换弹间隙·三连精准击杀 首次进入每日大赛轮换</div>
+                <div class="sub"><span>射击寸止</span><span>赛程轮换</span></div>
+              </div>
+            </div>
+            <div class="compact-item">
+              <div class="idx">11/05</div>
+              <div class="content">
+                <div class="title">雨夜追缉与沙漠环线两张新地图开放</div>
+                <div class="sub"><span>地图更新</span><span>竞速/载具</span></div>
+              </div>
+            </div>
+            <div class="compact-item">
+              <div class="idx">11/06</div>
+              <div class="content">
+                <div class="title">直升机悬停摇杆死区调校方案在社区传播</div>
+                <div class="sub"><span>攻略分享</span><span>飞行载具</span></div>
+              </div>
+            </div>
+            <div class="compact-item">
+              <div class="idx">11/07</div>
+              <div class="content">
+                <div class="title">午夜高架新增雨天变体，限速点通过速度下调至 8km/h</div>
+                <div class="sub"><span>地图变体</span><span>夜间赛道</span></div>
+              </div>
+            </div>
+            <div class="compact-item">
+              <div class="idx">11/08</div>
+              <div class="content">
+                <div class="title">连续寸止排行榜前十门槛提升至 0.04 秒误差</div>
+                <div class="sub"><span>排行变化</span><span>连击挑战</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- 右侧辅助栏 -->
+      <aside class="right-sidebar" aria-label="辅助信息">
+        <!-- 热门榜单 -->
+        <div class="sidebar-panel">
+          <div class="sidebar-panel-header">今日挑战热度榜</div>
+          <div class="sidebar-panel-body">
+            <div class="rank-item">
+              <span class="rank-num">1</span>
+              <span class="rank-name">雨夜追缉·精准停帧</span>
+              <span class="rank-hot">9.8k</span>
+            </div>
+            <div class="rank-item">
+              <span class="rank-num">2</span>
+              <span class="rank-name">沙漠环线·低速过点</span>
+              <span class="rank-hot">8.1k</span>
+            </div>
+            <div class="rank-item">
+              <span class="rank-num">3</span>
+              <span class="rank-name">换弹间隙·三连击杀</span>
+              <span class="rank-hot">7.6k</span>
+            </div>
+            <div class="rank-item">
+              <span class="rank-num">4</span>
+              <span class="rank-name">连续寸止·连击冲刺</span>
+              <span class="rank-hot">6.9k</span>
+            </div>
+            <div class="rank-item">
+              <span class="rank-num">5</span>
+              <span class="rank-name">午夜高架·最低速通过</span>
+              <span class="rank-hot">6.4k</span>
+            </div>
+            <div class="rank-item">
+              <span class="rank-num">6</span>
+              <span class="rank-name">直升机悬停·定点寸止</span>
+              <span class="rank-hot">5.8k</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 更新流 -->
+        <div class="sidebar-panel">
+          <div class="sidebar-panel-header">最新更新流</div>
+          <div class="sidebar-panel-body update-stream">
+            <div class="update-item">
+              <div class="u-title">雨夜追缉今日 09:00 开放</div>
+              <div class="u-time">今天 09:00</div>
+            </div>
+            <div class="update-item">
+              <div class="u-title">沙漠环线双倍积分时段开启</div>
+              <div class="u-time">今天 14:00</div>
+            </div>
+            <div class="update-item">
+              <div class="u-title">换弹间隙最佳录像已上传</div>
+              <div class="u-time">昨天 21:10</div>
+            </div>
+            <div class="update-item">
+              <div class="u-title">连续寸止排行榜规则微调</div>
+              <div class="u-time">今天 08:30</div>
+            </div>
+            <div class="update-item">
+              <div class="u-title">午夜高架雨天变体开放</div>
+              <div class="u-time">11 月 7 日</div>
+            </div>
+            <div class="update-item">
+              <div class="u-title">悬停死区调校方案分享</div>
+              <div class="u-time">11 月 6 日</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 快速入口 -->
+        <div class="sidebar-panel">
+          <div class="sidebar-panel-header">快速入口</div>
+          <div class="sidebar-panel-body" style="padding:12px 16px;display:flex;flex-direction:column;gap:8px;">
+            <a href="/#daily-schedule" class="btn" style="text-align:center;">今日赛程表</a>
+            <a href="/#featured" class="btn" style="text-align:center;">精选挑战录像</a>
+            <a href="/#deep-analysis" class="btn" style="text-align:center;">判定规则解析</a>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- 页尾 -->
+  <footer class="site-footer">
+    <div class="layout-container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo-text">r星每日大赛<span>寸止挑战</span></div>
+          <p>聚合每日寸止挑战赛程、通关录像、判定规则与社区排行，追踪极限操作、时间竞速与精准停帧等细分玩法。</p>
+        </div>
+        <div class="footer-col">
+          <h4>挑战分类</h4>
+          <a href="/#featured">竞速寸止</a>
+          <a href="/#featured">载具寸止</a>
+          <a href="/#featured">射击寸止</a>
+          <a href="/#featured">连击挑战</a>
+        </div>
+        <div class="footer-col">
+          <h4>内容板块</h4>
+          <a href="/#daily-schedule">每日赛程</a>
+          <a href="/#latest-updates">最新动态</a>
+          <a href="/#deep-analysis">深度解析</a>
+          <a href="/#guide">体验指南</a>
+        </div>
+        <div class="footer-col">
+          <h4>社区</h4>
+          <a href="/#comments">玩家评论</a>
+          <a href="/#faq">常见问题</a>
+          <a href="/#news">相关资讯</a>
+          <a href="/#related">相关推荐</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 r星每日大赛寸止挑战 · 内容聚合示例页面</span>
+        <span>部分内容为示例数据，仅用于展示页面结构</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 频道导航高亮（轻量交互）
+    (function() {
+      var navLinks = document.querySelectorAll('.channel-sidebar nav a');
+      var sections = [];
+      navLinks.forEach(function(link) {
+        var href = link.getAttribute('href');
+        if (href && href.indexOf('/#') === 0) {
+          var id = href.slice(2);
+          var el = document.getElementById(id);
+          if (el) sections.push({ link: link, el: el });
+        }
+      });
+
+      if (sections.length === 0) return;
+
+      function updateActive() {
+        var scrollPos = window.scrollY + 120;
+        var current = sections[0];
+        sections.forEach(function(item) {
+          if (item.el.offsetTop <= scrollPos) {
+            current = item;
+          }
+        });
+        navLinks.forEach(function(l) { l.classList.remove('active'); });
+        if (current) current.link.classList.add('active');
+      }
+
+      var ticking = false;
+      window.addEventListener('scroll', function() {
+        if (!ticking) {
+          window.requestAnimationFrame(function() {
+            updateActive();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+
+      updateActive();
+    })();
+  </script>
+
+</body>
+  </html>
